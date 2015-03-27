@@ -23,20 +23,20 @@ public class TaskPlay {
 		try{
 		Case endCase = champs.getCase(firstCase.getPosition().getX()+dirX,
 				firstCase.getPosition().getY()+dirY);
-		if(endCase.getType() == null){
-			firstCase.setType(null);
+		if(endCase.getType() == Type.NULL){
+			firstCase.setType(Type.NULL);
 			endCase.setType(Type.PLAYER);
 			return true;
 		}
 		if(endCase.getType() == Type.DEADLY){
-			firstCase.setType(null);
+			firstCase.setType(Type.NULL);
 			timer.cancel();
 			timer.purge();
 			System.out.println("dead");
 		}
 		if(endCase.getType() == Type.BREAKABLE){
-			firstCase.setType(null);
-			endCase.setType(null);
+			firstCase.setType(Type.NULL);
+			endCase.setType(Type.NULL);
 			timer.cancel();
 			timer.purge();
 			return true;
@@ -48,7 +48,7 @@ public class TaskPlay {
 			}
 		}
 		
-		}catch(ArrayIndexOutOfBoundsException e){firstCase.setType(null);timer.cancel();timer.purge();System.out.println("dead");}
+		}catch(ArrayIndexOutOfBoundsException e){firstCase.setType(Type.NULL);timer.cancel();timer.purge();System.out.println("dead");}
 		
 		return false;
 	}
@@ -88,14 +88,14 @@ public class TaskPlay {
 	private static void playerWithPlayableBlocksForward(ArrayList<Case> blocks, int dirX, int dirY){
 		for(Case c : blocks){
 			champs.getCase(c.getPosition().getX()+dirX,c.getPosition().getY()+dirY).setType(c.getType());
-			c.setType(null);
+			c.setType(Type.NULL);
 		}
 	}
 	
 	private static boolean isMovableList(ArrayList<Case> blocks, int dirX, int dirY){
 		for(Case c : blocks){
 			Case cc = champs.getCase(c.getPosition().getX()+dirX, c.getPosition().getY()+dirY);
-			if(cc.getType() != null && cc.getType() != Type.PLAYABLE_BLOCK){
+			if(cc.getType() != Type.NULL && cc.getType() != Type.PLAYABLE_BLOCK){
 				return false;
 			}
 		}

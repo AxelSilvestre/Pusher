@@ -8,12 +8,12 @@ public class Case implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7685868685838189677L;
-	private Position position;
+	private final Position position;
 	private Type type;
 	
 	public Case(Position position) {
 		this.position = position;
-		type = null;
+		type = Type.NULL;
 		
 	}
 
@@ -30,7 +30,7 @@ public class Case implements Serializable{
 	}
 	
 	public String toString(){
-		return "["+Type.toString(type)+"]";
+		return "["+type.toString()+"]";
 	}
 
 

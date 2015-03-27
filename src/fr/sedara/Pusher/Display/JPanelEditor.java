@@ -9,7 +9,7 @@ import fr.sedara.Pusher.Champs;
 import fr.sedara.Pusher.Type;
 
 @SuppressWarnings("serial")
-public class JPanelEditor extends JPanel{
+public class JPanelEditor extends JSplitPane{
 
 	private Champs champs;
 	private JLabelCase[][] tableau;
@@ -17,10 +17,10 @@ public class JPanelEditor extends JPanel{
 	private Type selectedType;
 	
 	public JPanelEditor(Champs champs) {
+		super(JSplitPane.HORIZONTAL_SPLIT);
 		this.champs = champs;
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		JPanel pan = new JPanel();
-		pan.setLayout(new GridLayout(champs.getY(),champs.getX()));
+		pan.setLayout(new GridLayout(champs.getY(), champs.getX()));
 		tableau = new JLabelCase[champs.getX()][champs.getY()];
 		for(int i=0;i<champs.getY();i++){
 			for(int j=0;j<champs.getX();j++){
@@ -28,9 +28,10 @@ public class JPanelEditor extends JPanel{
 				pan.add(tableau[j][i]);
 			}
 		}
+		
 		choosePanel = new JChoosePanel(this);
-		split.add(choosePanel);
-		split.add(pan);
+		add(choosePanel);
+		add(pan);
 	}
 
 	public Type getSelectedType() {

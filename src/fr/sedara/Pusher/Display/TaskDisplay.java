@@ -6,18 +6,20 @@ import java.util.Timer;
 
 import javax.swing.JFrame;
 
+import fr.sedara.Pusher.Champs;
 import fr.sedara.Pusher.TaskPlay;
 
 public class TaskDisplay implements Runnable, KeyListener{
 
-	private JFrame frame;
+	public static JFrame frame;
 	public static JPanelGame gamePanel;
 	public static JPanelEditor editorPanel;
 	
 	public void run() {
-		frame = new JFrame();		
+		frame = new JFrame();	
 		gamePanel = new JPanelGame(TaskPlay.champs);
-		frame.setContentPane(gamePanel);
+		editorPanel = new JPanelEditor(new Champs());
+		frame.setContentPane(editorPanel);
 		frame.setSize(gamePanel.getChamps().getX()*50,gamePanel.getChamps().getY()*50);
 		frame.setVisible(true);
 		frame.setEnabled(true);

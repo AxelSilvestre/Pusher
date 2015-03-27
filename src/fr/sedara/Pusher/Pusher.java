@@ -14,6 +14,11 @@ public class Pusher {
 		try {
 			champs = LevelFileManager.load();
 		} catch (ClassNotFoundException e) {} catch (IOException e) {}
+//		champs = new Champs();
+//		LevelGenerator.generateLevel(champs);
+//		try {
+//			LevelFileManager.save(champs);
+//		} catch (IOException e) {}
 
 		TaskPlay.start();
 		SwingUtilities.invokeLater(new TaskDisplay());

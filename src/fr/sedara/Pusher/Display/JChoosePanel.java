@@ -20,10 +20,10 @@ public class JChoosePanel extends JPanel{
 	private JPanelEditor editor;
 	
 	public JChoosePanel(JPanelEditor editor) {
-		super();
 		this.editor = editor;
-		for(int i=0;i<5;i++){
-			JLabelChoose jl = new JLabelChoose(Type.getType(i),this);
+		JLabelChoose jl;
+		for(int i=0;i<6;i++){
+			jl = new JLabelChoose(Type.getType(i),this);
 			add(jl);
 		}
 		

@@ -8,8 +8,8 @@ public class Position implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1810013978124484773L;
-	private int x;
-	private int y;
+	private final int x;
+	private final int y;
 	
 	public Position(int x, int y) {
 		this.x = x;
