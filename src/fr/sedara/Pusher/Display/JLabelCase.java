@@ -8,26 +8,24 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import fr.sedara.Pusher.Case;
-import fr.sedara.Pusher.Type;
 
 @SuppressWarnings("serial")
 public class JLabelCase extends JLabel implements MouseListener{
 	
 	private Case c;
-	private boolean edit;
 	
 	public JLabelCase(Case c, boolean edit) {
-		super();
 		this.c = c;
 		setOpaque(true);
 		//setPreferredSize(new Dimension(50,50));
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		setBackground(Type.getColor(c.getType()));
-		this.edit = edit;
+		setBackground(c.getType().getColor());
+		if(edit)
+			addMouseListener(this);
 	}
 	
 	public void setColor(){
-		setBackground(Type.getColor(c.getType()));
+		setBackground(c.getType().getColor());
 	}
 
 	public Case getC() {
@@ -35,7 +33,7 @@ public class JLabelCase extends JLabel implements MouseListener{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(edit){			
+		if(TaskDisplay.editorPanel.getSelectedType() != null){
 			c.setType(TaskDisplay.editorPanel.getSelectedType());
 			setColor();
 		}

@@ -1,7 +1,5 @@
 package fr.sedara.Pusher;
 
-import java.io.IOException;
-
 import javax.swing.SwingUtilities;
 
 import fr.sedara.Pusher.Display.TaskDisplay;
@@ -11,17 +9,7 @@ public class Pusher {
 	private static Champs champs;
 	
 	public static void main(String[] args) {
-		try {
-			champs = LevelFileManager.load();
-		} catch (ClassNotFoundException e) {} catch (IOException e) {}
-
-		TaskPlay.start();
 		SwingUtilities.invokeLater(new TaskDisplay());
-			
-
-
-
-
 	}
 
 	public static Champs getChamps() {

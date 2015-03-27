@@ -11,45 +11,60 @@ public class TaskPlay {
 	public static Champs champs;
 	public static Timer timer;
 	public static boolean caught;
+	public static boolean inMovement;
 	
 	public static void start(){
 		caught = false;
 		champs = Pusher.getChamps();
-		LevelGenerator.generateLevel(champs);
+		inMovement = false;
 	}
 	
 	public static boolean playerForward(int dirX, int dirY){
+		inMovement = true;
 		Case firstCase = champs.getPlayer();
 		try{
 		Case endCase = champs.getCase(firstCase.getPosition().getX()+dirX,
 				firstCase.getPosition().getY()+dirY);
-		if(endCase.getType() == null){
-			firstCase.setType(null);
-			endCase.setType(Type.PLAYER);
-			return true;
+		
+		if(caught){
+			if(isNearPlayableBlock(firstCase.getPosition())){
+				ArrayList<Case> list = getPlayableBlocks(firstCase.getPosition());
+				if(isMovableList(list, dirX, dirY, firstCase)){
+					playerWithPlayableBlocksForward(list, dirX, dirY, firstCase);
+					return true;
+				}
+			}else
+				caught = false;
 		}
-		if(endCase.getType() == Type.DEADLY){
-			firstCase.setType(null);
-			timer.cancel();
-			timer.purge();
-			System.out.println("dead");
-		}
-		if(endCase.getType() == Type.BREAKABLE){
-			firstCase.setType(null);
-			endCase.setType(null);
-			timer.cancel();
-			timer.purge();
-			return true;
-		}
-		if(caught && isNearPlayableBlock(firstCase.getPosition())){
-			ArrayList<Case> list = getPlayableBlocks(firstCase.getPosition());
-			if(isMovableList(list, dirX, dirY)){
-				playerWithPlayableBlocksForward(list, dirX, dirY);
+		
+		if(!caught){
+			if(endCase.getType() == Type.NULL){
+				firstCase.setType(Type.NULL);
+				endCase.setType(Type.PLAYER);
+				return true;
+			}
+			if(endCase.getType() == Type.DEADLY){
+				firstCase.setType(Type.NULL);
+				inMovement = false;
+				timer.cancel();
+				timer.purge();
+				System.out.println("dead");
+			}
+			if(endCase.getType() == Type.BREAKABLE){
+				endCase.setType(Type.NULL);
+				timer.cancel();
+				timer.purge();
+				inMovement = false;
+				return true;
 			}
 		}
+
+		// TODO End game
 		
-		}catch(ArrayIndexOutOfBoundsException e){firstCase.setType(null);timer.cancel();timer.purge();System.out.println("dead");}
+		}catch(ArrayIndexOutOfBoundsException e){firstCase.setType(Type.NULL);inMovement = false;
+		timer.cancel();timer.purge();System.out.println("dead");}
 		
+		inMovement = false;
 		return false;
 	}
 	
@@ -85,17 +100,32 @@ public class TaskPlay {
 		return false;
 	}
 	
-	private static void playerWithPlayableBlocksForward(ArrayList<Case> blocks, int dirX, int dirY){
+	private static void playerWithPlayableBlocksForward(ArrayList<Case> blocks, int dirX, int dirY,Case playerCase){
+		blocks.add(playerCase);
+		Object tab[][] = new Object[blocks.size()][2];
+		int i=0;
+		
 		for(Case c : blocks){
-			champs.getCase(c.getPosition().getX()+dirX,c.getPosition().getY()+dirY).setType(c.getType());
-			c.setType(null);
+			tab[i][1] = c.getType();
+			tab[i][0] = champs.getCase(c.getPosition().getX()+dirX,c.getPosition().getY()+dirY);
+			i++;
+			}
+		
+		for(Case c : blocks){
+			c.setType(Type.NULL);
 		}
+		
+		for(i = 0; i<blocks.size();i++){
+			((Case) tab[i][0]).setType((Type) tab[i][1]);
+		}
+
 	}
 	
-	private static boolean isMovableList(ArrayList<Case> blocks, int dirX, int dirY){
+	private static boolean isMovableList(ArrayList<Case> blocks, int dirX, int dirY, Case playerCase){
+		blocks.add(playerCase);
 		for(Case c : blocks){
 			Case cc = champs.getCase(c.getPosition().getX()+dirX, c.getPosition().getY()+dirY);
-			if(cc.getType() != null && cc.getType() != Type.PLAYABLE_BLOCK){
+			if(cc.getType() != Type.NULL && cc.getType() != Type.PLAYABLE_BLOCK && cc.getType() != Type.PLAYER){
 				return false;
 			}
 		}
@@ -107,27 +137,18 @@ public class TaskPlay {
 		ArrayList<Case> list = new ArrayList<Case>();
 		Case c;
 		int tab[] = {-1,0,1};
-		loop:
 		for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){
 				c = champs.getCase(position.getX()+tab[i], position.getY()+tab[j]);
 				if(c.getType() == Type.PLAYABLE_BLOCK){
 					list.add(c);
-					break loop;
 				}
 			}
-		}
+		}				
 		
 		if(list.isEmpty()){
 			return null;
 		}
-		
-		try{
-		for(Case cc : getPlayableBlocks(list.get(0).getPosition())){
-			list.add(cc);
-		}
-		}catch(NullPointerException e){};
-		
 		return list;
 	}
 	
