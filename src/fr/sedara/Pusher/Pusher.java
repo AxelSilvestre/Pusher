@@ -6,20 +6,18 @@ import javax.swing.SwingUtilities;
 
 public class Pusher {
 
-	private static Champs champs;
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new TaskDisplay());
-	}
+    private static Champs champs;
 
-	public static Champs getChamps() {
-		return champs;
-	}
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new TaskDisplay());
+    }
 
-	public static void setChamps(Champs champs) {
-		Pusher.champs = champs;
-	}
-	
-	
+    public static Champs getChamps() {
+        return champs;
+    }
+
+    public static void setChamps(Champs champs) {
+        Pusher.champs = champs;
+    }
 
 }

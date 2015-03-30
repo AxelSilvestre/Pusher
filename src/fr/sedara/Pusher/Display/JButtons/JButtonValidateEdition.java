@@ -1,27 +1,26 @@
 package fr.sedara.Pusher.Display.JButtons;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-
 import fr.sedara.Pusher.Display.JFrameNameAsker;
 import fr.sedara.Pusher.Display.TaskDisplay;
 
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class JButtonValidateEdition extends JButton implements ActionListener{
 
-	private static final long serialVersionUID = 1L;
+public class JButtonValidateEdition extends JButton implements ActionListener {
 
-	public JButtonValidateEdition() {
-		setText("Valider");
-		addActionListener(this);
-	}
+    private static final long serialVersionUID = 1L;
 
-	public void actionPerformed(ActionEvent e) {
-		TaskDisplay.frame.setEnabled(false);
-		new JFrameNameAsker();
-		
-	}
-	
+    public JButtonValidateEdition() {
+        setText("Valider");
+        addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        TaskDisplay.frame.setEnabled(false);
+        new JFrameNameAsker();
+
+    }
+
 }
