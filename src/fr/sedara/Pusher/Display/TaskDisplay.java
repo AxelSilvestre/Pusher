@@ -4,11 +4,11 @@ import fr.sedara.Pusher.Display.Menus.HomeMenu;
 import fr.sedara.Pusher.TaskPlay;
 
 import javax.swing.JFrame;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Timer;
 
-public class TaskDisplay implements Runnable, KeyListener {
+public class TaskDisplay extends KeyAdapter implements Runnable {
 
     public static JFrame       frame;
     public static JPanelGame   gamePanel;
@@ -26,12 +26,6 @@ public class TaskDisplay implements Runnable, KeyListener {
         frame.addKeyListener(this);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
-    public void keyPressed(KeyEvent e) {
-
-    }
-
 
     public void keyReleased(KeyEvent e) {
         if (!TaskPlay.inMovement) {
@@ -55,11 +49,6 @@ public class TaskDisplay implements Runnable, KeyListener {
                 TaskPlay.caught = !TaskPlay.caught;
             }
         }
-    }
-
-
-    public void keyTyped(KeyEvent e) {
-
     }
 
 
