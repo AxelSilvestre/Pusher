@@ -11,6 +11,8 @@ import fr.sedara.Pusher.Display.JButtons.JButtonCancel;
 import fr.sedara.Pusher.Display.JButtons.JButtonOpenFile;
 import fr.sedara.Pusher.Display.JButtons.JButtonValidateEdition;
 import fr.sedara.Pusher.Type;
+import fr.sedara.Pusher.Display.JButtons.JButtonCancel;
+import fr.sedara.Pusher.Display.JButtons.JButtonValidateEdition;
 
 @SuppressWarnings("serial")
 public class JChoosePanel extends JPanel{

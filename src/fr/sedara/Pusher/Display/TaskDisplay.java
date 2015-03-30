@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import fr.sedara.Pusher.Display.Menus.HomeMenu;
 import fr.sedara.Pusher.TaskPlay;
+import fr.sedara.Pusher.Display.Menus.HomeMenu;
 
 public class TaskDisplay implements Runnable, KeyListener{
 
