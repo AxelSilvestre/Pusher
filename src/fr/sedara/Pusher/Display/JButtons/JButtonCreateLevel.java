@@ -14,7 +14,7 @@ public class JButtonCreateLevel extends JButton implements ActionListener {
 
 
     public JButtonCreateLevel() {
-        setText("Cr�er un niveau");
+        setText("Créer un niveau");
         addActionListener(this);
     }
 
