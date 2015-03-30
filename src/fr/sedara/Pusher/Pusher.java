@@ -1,8 +1,8 @@
 package fr.sedara.Pusher;
 
-import javax.swing.SwingUtilities;
-
 import fr.sedara.Pusher.Display.TaskDisplay;
+
+import javax.swing.SwingUtilities;
 
 public class Pusher {
 
