@@ -13,7 +13,6 @@ import fr.sedara.Pusher.Case;
 public class JLabelCase extends JLabel implements MouseListener{
 	
 	private Case c;
-	private boolean edit;
 	
 	public JLabelCase(Case c, boolean edit) {
 		this.c = c;
@@ -21,7 +20,6 @@ public class JLabelCase extends JLabel implements MouseListener{
 		//setPreferredSize(new Dimension(50,50));
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setBackground(c.getType().getColor());
-		this.edit = edit;
 		if(edit)
 			addMouseListener(this);
 	}

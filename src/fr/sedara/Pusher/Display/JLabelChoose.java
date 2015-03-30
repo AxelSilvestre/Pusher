@@ -17,11 +17,15 @@ public class JLabelChoose extends JLabel implements MouseListener{
 	public JLabelChoose(Type type, JChoosePanel panel) {
 		this.type = type;
 		this.panel = panel;
-		setPreferredSize(new Dimension(20,20));
+		setPreferredSize(new Dimension(30,30));
 		setOpaque(true);
 		setBackground(type.getColor());
 		addMouseListener(this);
 		
+	}
+	
+	public Type getType(){
+		return type;
 	}
 
 	public void mouseClicked(MouseEvent e) {

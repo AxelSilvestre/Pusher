@@ -1,5 +1,6 @@
 package fr.sedara.Pusher.Display;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -28,10 +29,12 @@ public class JPanelEditor extends JSplitPane{
 				pan.add(tableau[j][i]);
 			}
 		}
-		
+		pan.setPreferredSize(new Dimension(600,600));
+		setResizeWeight(0.1);
 		choosePanel = new JChoosePanel(this);
 		add(choosePanel);
 		add(pan);
+		setDividerSize(0);
 	}
 
 	public Type getSelectedType() {
@@ -42,9 +45,10 @@ public class JPanelEditor extends JSplitPane{
 		this.selectedType = selectedType;
 	}
 	
-	
-	
-	
+	public Champs getChamps(){
+		return champs;
+	}
+
 	
 	
 }

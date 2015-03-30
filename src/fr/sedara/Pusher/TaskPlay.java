@@ -11,14 +11,17 @@ public class TaskPlay {
 	public static Champs champs;
 	public static Timer timer;
 	public static boolean caught;
+	public static boolean inMovement;
 	
 	public static void start(){
 		caught = false;
 		champs = Pusher.getChamps();
-		LevelGenerator.generateLevel(champs);
+		inMovement = false;
+		//LevelGenerator.generateLevel(champs);
 	}
 	
 	public static boolean playerForward(int dirX, int dirY){
+		inMovement = true;
 		Case firstCase = champs.getPlayer();
 		try{
 		Case endCase = champs.getCase(firstCase.getPosition().getX()+dirX,
@@ -30,6 +33,7 @@ public class TaskPlay {
 		}
 		if(endCase.getType() == Type.DEADLY){
 			firstCase.setType(Type.NULL);
+			inMovement = false;
 			timer.cancel();
 			timer.purge();
 			System.out.println("dead");
@@ -39,6 +43,7 @@ public class TaskPlay {
 			endCase.setType(Type.NULL);
 			timer.cancel();
 			timer.purge();
+			inMovement = false;
 			return true;
 		}
 		if(caught && isNearPlayableBlock(firstCase.getPosition())){
@@ -48,8 +53,9 @@ public class TaskPlay {
 			}
 		}
 		
-		}catch(ArrayIndexOutOfBoundsException e){firstCase.setType(Type.NULL);timer.cancel();timer.purge();System.out.println("dead");}
+		}catch(ArrayIndexOutOfBoundsException e){firstCase.setType(Type.NULL);inMovement = false;timer.cancel();timer.purge();System.out.println("dead");}
 		
+		inMovement = false;
 		return false;
 	}
 	

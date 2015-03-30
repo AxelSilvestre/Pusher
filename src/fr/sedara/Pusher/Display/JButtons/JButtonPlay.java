@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import fr.sedara.Pusher.Display.JPanelChooseLevel;
+import fr.sedara.Pusher.Display.TaskDisplay;
+
 public class JButtonPlay extends JButton implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
@@ -17,7 +20,8 @@ public class JButtonPlay extends JButton implements ActionListener{
 
 
 	public void actionPerformed(ActionEvent e) {
-		
+		TaskDisplay.frame.setContentPane(new JPanelChooseLevel());
+		TaskDisplay.frame.revalidate();
 	}
 	
 	

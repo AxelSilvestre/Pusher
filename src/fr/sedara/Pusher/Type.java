@@ -4,21 +4,27 @@ import java.awt.Color;
 
 public enum Type {	
 	
-	PLAYER("P",0, Color.BLUE),
-	WALL("W",3,Color.RED),
-	PLAYABLE_BLOCK("O", 4, Color.GRAY),
-	DEADLY("D",2,Color.WHITE),
-	BREAKABLE("B",1,Color.YELLOW),
-	NULL(" ",-1,Color.BLACK);
+	PLAYER("P",0, Color.BLUE, "Joueur"),
+	WALL("W",3,Color.RED,"Mur"),
+	PLAYABLE_BLOCK("O", 4, Color.GRAY,"Bloc jouable"),
+	DEADLY("D",2,Color.WHITE,"Bloc tueur"),
+	BREAKABLE("B",1,Color.YELLOW,"Bloc destructible"),
+	NULL(" ",-1,Color.BLACK,"Vide");
 	
 	private final String toStringChar;
 	private final int value;
 	private final Color color;
+	private final String name;
 	
-	private Type(String toStringChar, int value, Color color){
+	private Type(String toStringChar, int value, Color color, String name){
 		this.toStringChar = toStringChar;
 		this.value = value;
 		this.color = color;
+		this.name = name;
+	}
+	
+	public String getName(){
+		return name;
 	}
 	
 	public String toString(){

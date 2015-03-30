@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import fr.sedara.Pusher.Display.JFrameNameAsker;
+import fr.sedara.Pusher.Display.TaskDisplay;
+
+
 public class JButtonValidateEdition extends JButton implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -15,6 +19,8 @@ public class JButtonValidateEdition extends JButton implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		TaskDisplay.frame.setEnabled(false);
+		new JFrameNameAsker();
 		
 	}
 	
