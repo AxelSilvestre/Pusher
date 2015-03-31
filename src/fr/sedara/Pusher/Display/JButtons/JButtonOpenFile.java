@@ -38,6 +38,7 @@ public class JButtonOpenFile extends JButton implements ActionListener {
             }
             catch (ClassNotFoundException e1) {}
             catch (IOException e1) {}
+            TaskDisplay.frame.setContentPane(TaskDisplay.editorPanel);
             TaskDisplay.frame.setEnabled(true);
             TaskDisplay.frame.toFront();
             TaskDisplay.frame.revalidate();

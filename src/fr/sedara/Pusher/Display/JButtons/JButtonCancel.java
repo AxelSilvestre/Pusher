@@ -64,6 +64,7 @@ public class JButtonCancel extends JButton implements ActionListener {
             TaskDisplay.frame.setContentPane(TaskDisplay.home);
             TaskDisplay.frame.setSize(200, 200);
             TaskDisplay.frame.setLocationRelativeTo(null);
+           
         }
         //		if(previousFrame != null)
         //			TaskDisplay.frame.setContentPane(previousFrame);
@@ -72,5 +73,21 @@ public class JButtonCancel extends JButton implements ActionListener {
         TaskDisplay.frame.toFront();
 
     }
+
+	public JFrame getFrameToClose() {
+		return frameToClose;
+	}
+
+	public void setFrameToClose(JFrame frameToClose) {
+		this.frameToClose = frameToClose;
+	}
+
+	public boolean isHome() {
+		return home;
+	}
+
+	public void setHome(boolean home) {
+		this.home = home;
+	}
 
 }

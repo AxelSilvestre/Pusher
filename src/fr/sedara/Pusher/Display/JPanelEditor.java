@@ -48,5 +48,4 @@ public class JPanelEditor extends JSplitPane {
         return champs;
     }
 
-
 }
