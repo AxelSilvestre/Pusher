@@ -41,7 +41,7 @@ public class JFrameEditorChooseLevel extends JFrame implements ListSelectionList
         JSplitPane jsp2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         JSplitPane jsp3 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         jsp.add(scroll);
-        open = new JButtonOpenFile(this);
+        open   = new JButtonOpenFile(this);
         delete = new JButtonDeleteLevel(this);
         cancel = new JButtonCancel(this);
         jsp3.add(delete);

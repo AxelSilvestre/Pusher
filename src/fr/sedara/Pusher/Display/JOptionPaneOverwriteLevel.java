@@ -1,0 +1,56 @@
+package fr.sedara.Pusher.Display;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import fr.sedara.Pusher.LevelFileManager;
+
+public class JOptionPaneOverwriteLevel extends JOptionPane{
+
+	private static final long serialVersionUID = 1L;
+
+	public JOptionPaneOverwriteLevel(JFrame frame, String fileName) {
+		frame.setEnabled(false);
+		final JOptionPane jo = new JOptionPane("Le niveau existe déjà, voulez vous l'écraser?", JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+		final JDialog jd = new JDialog(frame,"Attention!",true);
+		jd.setContentPane(jo);
+		jd.setLocationRelativeTo(null);
+		jd.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+
+
+		jo.addPropertyChangeListener(
+				new PropertyChangeListener() {
+					public void propertyChange(PropertyChangeEvent e) {
+						String prop = e.getPropertyName();
+						if (jd.isVisible() && (e.getSource() == jo)	&& (prop.equals(JOptionPane.VALUE_PROPERTY))) {
+							jd.dispose();
+						}
+					}
+				});
+		jd.pack();
+		jd.setVisible(true);
+		jd.toFront();
+
+		int value = ((Integer)jo.getValue()).intValue();		
+		if (value == JOptionPane.OK_OPTION) {
+			frame.dispose();
+			frame.setState(JFrame.EXIT_ON_CLOSE);
+            try {
+                LevelFileManager.save(TaskDisplay.editorPanel.getChamps(), fileName);
+            }catch (IOException e1) {}
+            TaskDisplay.frame.toFront();
+            TaskDisplay.frame.setEnabled(true);
+		}else if (value == JOptionPane.CANCEL_OPTION) {
+			TaskDisplay.frame.toFront();
+			frame.setEnabled(true);
+			frame.toFront();
+			frame.revalidate();
+		}
+	}
+
+}

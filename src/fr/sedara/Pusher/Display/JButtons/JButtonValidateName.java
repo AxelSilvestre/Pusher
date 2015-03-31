@@ -1,12 +1,14 @@
 package fr.sedara.Pusher.Display.JButtons;
 
 import fr.sedara.Pusher.Display.JFrameNameAsker;
+import fr.sedara.Pusher.Display.JOptionPaneOverwriteLevel;
 import fr.sedara.Pusher.Display.TaskDisplay;
 import fr.sedara.Pusher.LevelFileManager;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -33,7 +35,7 @@ public class JButtonValidateName extends JButton implements ActionListener {
             String[] list = folder.list();
             for (String str : list) {
                 if ((field.getText() + ".Plvl").equalsIgnoreCase(str)) {
-                    current.getLabel().setText("<html>Le niveau est d�j� existant.<br>Choisissez un autre nom.</html>");
+                    new JOptionPaneOverwriteLevel(current, field.getText());
                     return;
                 }
             }
