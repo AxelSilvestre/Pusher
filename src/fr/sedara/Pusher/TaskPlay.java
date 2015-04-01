@@ -27,7 +27,7 @@ public class TaskPlay {
 
             if (caught) {
                 if (isNearPlayableBlock(firstCase.getPosition())) {
-                    ArrayList<Case> list = getPlayableBlocks(firstCase.getPosition());
+                    ArrayList<Case> list = getAllPlayableBlocks(firstCase.getPosition());
                     if (isMovableList(list, dirX, dirY, firstCase)) {
                         playerWithPlayableBlocksForward(list, dirX, dirY, firstCase);
                         return true;
@@ -136,8 +136,26 @@ public class TaskPlay {
 
         return true;
     }
+    
+    private static ArrayList<Case> getAllPlayableBlocks(Position position){
+        ArrayList<Case> list = new ArrayList<Case>();
+        ArrayList<Case> tempList = new ArrayList<Case>();
+    	list = getClosePlayableBlocks(position);
+        
+        for(Case c : list){
+        	if(!getClosePlayableBlocks(c.getPosition()).isEmpty())
+        		tempList.addAll(getClosePlayableBlocks(c.getPosition()));
+        }
+        
+        for(Case c : tempList){
+        	if(!list.contains(c))
+        		list.add(c);
+        }
+    	
+		return list;    	
+    }
 
-    private static ArrayList<Case> getPlayableBlocks(Position position) {
+    private static ArrayList<Case> getClosePlayableBlocks(Position position) {
         ArrayList<Case> list = new ArrayList<Case>();
         Case c;
         int tab[] = {-1, 0, 1};
@@ -149,10 +167,14 @@ public class TaskPlay {
                 }
             }
         }
-
-        if (list.isEmpty()) {
-            return null;
-        }
+        
+//        Object[] tab = new Object[1][2];
+//        tab[0][0]
+//        
+//        if(list.isEmpty()){
+//        	
+//        }
+        
         return list;
     }
 

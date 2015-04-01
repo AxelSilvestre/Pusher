@@ -47,6 +47,7 @@ public class TaskDisplay extends KeyAdapter implements Runnable {
             }
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 TaskPlay.caught = !TaskPlay.caught;
+                
             }
         }
     }
