@@ -140,13 +140,34 @@ public class TaskPlay {
     private static ArrayList<Case> getAllPlayableBlocks(Position position){
         ArrayList<Case> list = new ArrayList<Case>();
         ArrayList<Case> tempList = new ArrayList<Case>();
-    	list = getClosePlayableBlocks(position);
-        
-        for(Case c : list){
-        	if(!getClosePlayableBlocks(c.getPosition()).isEmpty())
-        		tempList.addAll(getClosePlayableBlocks(c.getPosition()));
-        }
-        
+        ArrayList<Case> tested = new ArrayList<Case>();
+        ArrayList<Case> tempList2 = new ArrayList<Case>();
+		// TODO cette fonction
+		boolean b = true;
+		tempList2 = getClosePlayableBlocks(position);
+
+		while(b){
+			list = tested;
+			for(Case c : tempList2){
+				if(!tested.contains(c)){
+					tempList.addAll(getClosePlayableBlocks(c.getPosition()));
+					tested.add(c);
+					System.out.println(tested.size());
+				}
+			}
+			
+			if(tested.equals(list)){
+				b = false;
+				System.out.println(list.size());
+				System.out.println(tested.size());
+			}
+			
+			tempList2.addAll(tempList);			
+			
+		}
+    	
+        list.clear();
+		
         for(Case c : tempList){
         	if(!list.contains(c))
         		list.add(c);
@@ -158,6 +179,7 @@ public class TaskPlay {
     private static ArrayList<Case> getClosePlayableBlocks(Position position) {
         ArrayList<Case> list = new ArrayList<Case>();
         Case c;
+        // TODO Positions : haut, bas, droite, gauche
         int tab[] = {-1, 0, 1};
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -167,14 +189,7 @@ public class TaskPlay {
                 }
             }
         }
-        
-//        Object[] tab = new Object[1][2];
-//        tab[0][0]
-//        
-//        if(list.isEmpty()){
-//        	
-//        }
-        
+                
         return list;
     }
 
