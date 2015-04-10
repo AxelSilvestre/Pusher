@@ -1,6 +1,7 @@
 package fr.sedara.Pusher;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Champs implements Serializable {
 
@@ -54,6 +55,20 @@ public class Champs implements Serializable {
         }
         System.out.println("No player was found");
         return null;
+    }
+    
+    public ArrayList<Case> getObjectives(){
+    	ArrayList<Case> list = new ArrayList<Case>();
+    	Case c;
+    	for(int i = 0; i < x; i++){
+    		for(int j = 0; j < y; j++){
+    			c = getCase(i, j);
+    			if(c.getType() == Type.OBJETIVE)
+    				list.add(c);
+    		}
+    	}
+    	
+    	return list;
     }
 
     public int getX() {

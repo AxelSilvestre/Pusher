@@ -12,30 +12,35 @@ public class TaskPlay {
     public static Timer   timer;
     public static boolean caught;
     public static boolean inMovement;
+    public static ArrayList<Case> playingCases;
+    public static ArrayList<Case> objectives;
 
     public static void start() {
         caught = false;
         champs = Pusher.getChamps();
         inMovement = false;
+        objectives = champs.getObjectives();
     }
 
     public static boolean playerForward(int dirX, int dirY) {
         inMovement = true;
         Case firstCase = champs.getPlayer();
         try {
-            Case endCase = champs.getCase(firstCase.getPosition().getX() + dirX, firstCase.getPosition().getY() + dirY);
-
+        	
             if (caught) {
-                if (isNearPlayableBlock(firstCase.getPosition())) {
-                    ArrayList<Case> list = getAllPlayableBlocks(firstCase.getPosition());
-                    if (isMovableList(list, dirX, dirY, firstCase)) {
-                        playerWithPlayableBlocksForward(list, dirX, dirY, firstCase);
-                        return true;
-                    }
-                }
-                else { caught = false; }
+            	playingCases.add(firstCase);
+            	if (isMovableList(playingCases, dirX, dirY)) {
+            		playerWithPlayableBlocksForward(playingCases, dirX, dirY);
+            		playingCases.remove(champs.getPlayer());
+            		return true;
+            	}
+            	playingCases.remove(champs.getPlayer());
             }
 
+            
+            Case endCase = champs.getCase(firstCase.getPosition().getX() + dirX,
+            		firstCase.getPosition().getY() + dirY);
+            
             if (!caught) {
                 if (endCase.getType() == Type.NULL) {
                     firstCase.setType(Type.NULL);
@@ -86,10 +91,22 @@ public class TaskPlay {
                     timer.cancel();
                     timer.purge();
                 }
+                if(objectives.isEmpty()){
+                	System.out.println("Win");
+                }
             }
 
         };
         return tm;
+    }
+    
+    public static void setplayingList(){
+		Position p = champs.getPlayer().getPosition();
+    	if(caught && isNearPlayableBlock(p))
+    		playingCases = getAllPlayableBlocks(p);
+    	else
+    		playingCases = null;
+    	
     }
 
     private static boolean isNearPlayableBlock(Position position) {
@@ -104,14 +121,17 @@ public class TaskPlay {
         return false;
     }
 
-    private static void playerWithPlayableBlocksForward(ArrayList<Case> blocks, int dirX, int dirY, Case playerCase) {
-        blocks.add(playerCase);
-        Object tab[][] = new Object[blocks.size()][2];
+    private static void playerWithPlayableBlocksForward(ArrayList<Case> blocks, int dirX, int dirY) {
+        int size = blocks.size();
+        Object tab[][] = new Object[size][2];
         int i = 0;
+        
 
         for (Case c : blocks) {
             tab[i][1] = c.getType();
             tab[i][0] = champs.getCase(c.getPosition().getX() + dirX, c.getPosition().getY() + dirY);
+            if(((Case) tab[i][0]).getType() == Type.OBJETIVE)
+            	objectives.remove((Case) tab[i][0]);
             i++;
         }
 
@@ -119,21 +139,24 @@ public class TaskPlay {
             c.setType(Type.NULL);
         }
 
-        for (i = 0; i < blocks.size(); i++) {
+        blocks.clear();
+        
+        for (i = 0; i < size; i++) {
             ((Case) tab[i][0]).setType((Type) tab[i][1]);
+            blocks.add((Case) tab[i][0]);
         }
+
 
     }
 
-    private static boolean isMovableList(ArrayList<Case> blocks, int dirX, int dirY, Case playerCase) {
-        blocks.add(playerCase);
+    private static boolean isMovableList(ArrayList<Case> blocks, int dirX, int dirY) {
+    	if(blocks == null) return false;
         for (Case c : blocks) {
             Case cc = champs.getCase(c.getPosition().getX() + dirX, c.getPosition().getY() + dirY);
-            if (cc.getType() != Type.NULL && cc.getType() != Type.PLAYABLE_BLOCK && cc.getType() != Type.PLAYER) {
+            if (cc.getType() != Type.NULL && !blocks.contains(cc)) 
                 return false;
-            }
+            
         }
-
         return true;
     }
     
@@ -142,52 +165,42 @@ public class TaskPlay {
         ArrayList<Case> tempList = new ArrayList<Case>();
         ArrayList<Case> tested = new ArrayList<Case>();
         ArrayList<Case> tempList2 = new ArrayList<Case>();
-		// TODO cette fonction
-		boolean b = true;
+        
 		tempList2 = getClosePlayableBlocks(position);
 
-		while(b){
-			list = tested;
+		while(true){
+			
+			list.clear();
+			list.addAll(tested);
+			
 			for(Case c : tempList2){
 				if(!tested.contains(c)){
 					tempList.addAll(getClosePlayableBlocks(c.getPosition()));
 					tested.add(c);
-					System.out.println(tested.size());
 				}
 			}
 			
 			if(tested.equals(list)){
-				b = false;
-				System.out.println(list.size());
-				System.out.println(tested.size());
+				break;
 			}
 			
 			tempList2.addAll(tempList);			
 			
 		}
-    	
-        list.clear();
-		
-        for(Case c : tempList){
-        	if(!list.contains(c))
-        		list.add(c);
-        }
-    	
+   	
 		return list;    	
     }
 
     private static ArrayList<Case> getClosePlayableBlocks(Position position) {
         ArrayList<Case> list = new ArrayList<Case>();
         Case c;
-        // TODO Positions : haut, bas, droite, gauche
-        int tab[] = {-1, 0, 1};
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                c = champs.getCase(position.getX() + tab[i], position.getY() + tab[j]);
-                if (c.getType() == Type.PLAYABLE_BLOCK) {
-                    list.add(c);
-                }
-            }
+        int tab[][] = {{-1,0} , {1,0}, {0,-1} , {0,1}};
+        for (int i = 0; i < 4; i++) {
+        	c = champs.getCase(position.getX() + tab[i][0], position.getY() + tab[i][1]);
+        	if (c.getType() == Type.PLAYABLE_BLOCK) {
+        		list.add(c);
+        	}
+
         }
                 
         return list;
