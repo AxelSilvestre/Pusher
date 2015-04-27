@@ -92,6 +92,8 @@ public class TaskPlay {
                     timer.purge();
                 }
                 if(objectives.isEmpty()){
+                	timer.cancel();
+                    timer.purge();
                 	System.out.println("Win");
                 }
             }
@@ -124,14 +126,13 @@ public class TaskPlay {
     private static void playerWithPlayableBlocksForward(ArrayList<Case> blocks, int dirX, int dirY) {
         int size = blocks.size();
         Object tab[][] = new Object[size][2];
-        int i = 0;
-        
+        int i = 0;        
 
         for (Case c : blocks) {
             tab[i][1] = c.getType();
             tab[i][0] = champs.getCase(c.getPosition().getX() + dirX, c.getPosition().getY() + dirY);
             if(((Case) tab[i][0]).getType() == Type.OBJETIVE)
-            	objectives.remove((Case) tab[i][0]);
+            	objectives.remove((Case) tab[i][0]); 
             i++;
         }
 
@@ -153,7 +154,9 @@ public class TaskPlay {
     	if(blocks == null) return false;
         for (Case c : blocks) {
             Case cc = champs.getCase(c.getPosition().getX() + dirX, c.getPosition().getY() + dirY);
-            if (cc.getType() != Type.NULL && !blocks.contains(cc)) 
+            if(cc.getType() == Type.OBJETIVE && c.getType() == Type.PLAYER)
+            	return false;
+            if (cc.getType() != Type.NULL && !blocks.contains(cc) && cc.getType() != Type.OBJETIVE) 
                 return false;
             
         }
