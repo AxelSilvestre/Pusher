@@ -1,5 +1,6 @@
 package fr.sedara.Pusher;
 
+import fr.sedara.Pusher.Display.JFrameEndGame;
 import fr.sedara.Pusher.Display.TaskDisplay;
 
 import java.util.ArrayList;
@@ -52,7 +53,8 @@ public class TaskPlay {
                     inMovement = false;
                     timer.cancel();
                     timer.purge();
-                    System.out.println("dead");
+                    new JFrameEndGame(false);
+                    return false;
                 }
                 if (endCase.getType() == Type.BREAKABLE) {
                     endCase.setType(Type.NULL);
@@ -63,15 +65,13 @@ public class TaskPlay {
                 }
             }
 
-            // TODO End game
-
         }
         catch (ArrayIndexOutOfBoundsException e) {
             firstCase.setType(Type.NULL);
             inMovement = false;
             timer.cancel();
             timer.purge();
-            System.out.println("dead");
+            new JFrameEndGame(false);
         }
 
         inMovement = false;
@@ -94,7 +94,7 @@ public class TaskPlay {
                 if(objectives.isEmpty()){
                 	timer.cancel();
                     timer.purge();
-                	System.out.println("Win");
+                	new JFrameEndGame(true);
                 }
             }
 
@@ -102,7 +102,7 @@ public class TaskPlay {
         return tm;
     }
     
-    public static void setplayingList(){
+    public static void setPlayingList(){
 		Position p = champs.getPlayer().getPosition();
     	if(caught && isNearPlayableBlock(p))
     		playingCases = getAllPlayableBlocks(p);
@@ -151,16 +151,22 @@ public class TaskPlay {
     }
 
     private static boolean isMovableList(ArrayList<Case> blocks, int dirX, int dirY) {
+    	boolean b = true;
     	if(blocks == null) return false;
         for (Case c : blocks) {
             Case cc = champs.getCase(c.getPosition().getX() + dirX, c.getPosition().getY() + dirY);
+            if(cc.getType() == Type.BREAKABLE){
+            	cc.setType(Type.NULL);
+            	b = false;
+            }
             if(cc.getType() == Type.OBJETIVE && c.getType() == Type.PLAYER)
             	return false;
             if (cc.getType() != Type.NULL && !blocks.contains(cc) && cc.getType() != Type.OBJETIVE) 
                 return false;
+
             
         }
-        return true;
+        return b;
     }
     
     private static ArrayList<Case> getAllPlayableBlocks(Position position){

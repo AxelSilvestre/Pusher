@@ -48,4 +48,10 @@ public class JPanelEditor extends JSplitPane {
         return champs;
     }
 
+	public boolean havePlayer() {
+		if(champs.getPlayer() != null)
+			return true;
+		return false;
+	}
+
 }

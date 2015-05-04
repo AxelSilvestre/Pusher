@@ -21,10 +21,17 @@ public class JButtonCancel extends JButton implements ActionListener {
         addActionListener(this);
     }
 
-    public JButtonCancel(JFrame frame) {
+    public JButtonCancel(JFrame frameToClose) {
         setText("Annuler");
-        frameToClose = frame;
+        this.frameToClose = frameToClose;
         home = false;
+        addActionListener(this);
+    }
+    
+    public JButtonCancel(JFrame frameToClose, boolean home) {
+        setText("Menu principal");
+        this.frameToClose = frameToClose;
+        this.home = home;
         addActionListener(this);
     }
 

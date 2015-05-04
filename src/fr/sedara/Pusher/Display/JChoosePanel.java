@@ -25,6 +25,7 @@ public class JChoosePanel extends JPanel {
     //	private ImageIcon deadlyIcon = new ImageIcon("icons/deadly.png");
     //	private ImageIcon breakableIcon = new ImageIcon("icons/breakable.png");
     private JPanelEditor editor;
+    private JLabel warning;
 
     public JChoosePanel(JPanelEditor editor) {
         this.editor = editor;
@@ -38,6 +39,9 @@ public class JChoosePanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(new JButtonOpenFile(), gbc);
+        gbc.gridx = 1;
+        warning = new JLabel();
+        add(warning, gbc);
         for (int i = 0; i < Type.NUMBER_OF_BLOCKS; i++) {
             gbc.gridx = 0;
             gbc.gridy = i + 1;
@@ -56,9 +60,19 @@ public class JChoosePanel extends JPanel {
 
 
     }
+    
+    public boolean exisitingPlayer(){    	
+    	if(editor.havePlayer())
+    		return true;    	
+    	return false;
+    }
 
     public void setSelectedType(Type selectedType) {
         editor.setSelectedType(selectedType);
+    }
+    
+    public void setWarning(String text){
+    	warning.setText(text);
     }
 
 
