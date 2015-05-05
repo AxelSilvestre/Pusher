@@ -39,6 +39,7 @@ public class JButtonPlayLevel extends JButton implements ActionListener {
             TaskDisplay.frame.setLocationRelativeTo(null);
             TaskDisplay.frame.requestFocusInWindow();
             TaskDisplay.frame.revalidate();
+            TaskPlay.currentLevel = fileName;
             TaskPlay.start();
 
         }

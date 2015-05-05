@@ -3,12 +3,14 @@ package fr.sedara.Pusher.Display;
 import fr.sedara.Pusher.Champs;
 
 import javax.swing.JPanel;
+
 import java.awt.GridLayout;
 
-@SuppressWarnings("serial")
 public class JPanelGame extends JPanel {
 
-    private JLabelCase[][] tableau;
+	private static final long serialVersionUID = 1L;
+	
+	private JLabelCase[][] tableau;
     private Champs         champs;
 
 
@@ -22,6 +24,8 @@ public class JPanelGame extends JPanel {
                 add(tableau[j][i]);
             }
         }
+        
+        
     }
 
 

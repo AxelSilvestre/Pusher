@@ -50,6 +50,10 @@ public class TaskDisplay extends KeyAdapter implements Runnable {
                 TaskPlay.setPlayingList();
                 
             }
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            	if(frame.getContentPane().equals(gamePanel))
+            		new JFramePause();
+            }
         }
     }
 

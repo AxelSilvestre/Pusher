@@ -15,6 +15,7 @@ public class TaskPlay {
     public static boolean inMovement;
     public static ArrayList<Case> playingCases;
     public static ArrayList<Case> objectives;
+    public static String currentLevel;
 
     public static void start() {
         caught = false;
@@ -35,6 +36,7 @@ public class TaskPlay {
             		playingCases.remove(champs.getPlayer());
             		return true;
             	}
+            	inMovement = false;
             	playingCases.remove(champs.getPlayer());
             }
 
@@ -161,6 +163,12 @@ public class TaskPlay {
             }
             if(cc.getType() == Type.OBJETIVE && c.getType() == Type.PLAYER)
             	return false;
+            if(cc.getType() == Type.DEADLY && c.getType() == Type.PLAYER){
+            	timer.purge();
+            	timer.cancel();
+            	new JFrameEndGame(false);
+            	return false;
+            }
             if (cc.getType() != Type.NULL && !blocks.contains(cc) && cc.getType() != Type.OBJETIVE) 
                 return false;
 

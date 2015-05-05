@@ -53,7 +53,6 @@ public class Champs implements Serializable {
                 if (getCase(i, j).getType() == Type.PLAYER) { return getCase(i, j); }
             }
         }
-        System.out.println("No player was found");
         return null;
     }
     

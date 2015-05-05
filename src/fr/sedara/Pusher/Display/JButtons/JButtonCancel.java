@@ -34,6 +34,13 @@ public class JButtonCancel extends JButton implements ActionListener {
         this.home = home;
         addActionListener(this);
     }
+    
+    public JButtonCancel(JFrame frameToClose, boolean home, String text) {
+        setText(text);
+        this.frameToClose = frameToClose;
+        this.home = home;
+        addActionListener(this);
+    }
 
     public void actionPerformed(ActionEvent e) {
         if (frameToClose != null) {

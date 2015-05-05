@@ -28,11 +28,12 @@ public class JLabelChoose extends JLabel implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-    	if(!panel.exisitingPlayer())
+    	if(panel.exisitingPlayer() && type == Type.PLAYER)
+    		panel.setWarning("<html>Joueur déjà<br>présent<html>");
+    	else{
     		panel.setSelectedType(type);
-    	else
-    		panel.setWarning("Joueur déjà présent");
-    	// TODO Un seul joueur sur éditeur
+    		panel.setWarning("");
+    	}
     }
 
     public void mouseEntered(MouseEvent e) {

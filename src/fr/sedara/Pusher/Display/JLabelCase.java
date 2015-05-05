@@ -1,9 +1,11 @@
 package fr.sedara.Pusher.Display;
 
 import fr.sedara.Pusher.Case;
+import fr.sedara.Pusher.Type;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,7 +18,6 @@ public class JLabelCase extends JLabel implements MouseListener {
     public JLabelCase(Case c, boolean edit) {
         this.c = c;
         setOpaque(true);
-        //setPreferredSize(new Dimension(50,50));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setBackground(c.getType().getColor());
         if (edit) { addMouseListener(this); }
@@ -33,6 +34,8 @@ public class JLabelCase extends JLabel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if (TaskDisplay.editorPanel.getSelectedType() != null) {
             c.setType(TaskDisplay.editorPanel.getSelectedType());
+        	if(TaskDisplay.editorPanel.getSelectedType() == Type.PLAYER)
+            	TaskDisplay.editorPanel.setSelectedType(null);
             setColor();
         }
     }
