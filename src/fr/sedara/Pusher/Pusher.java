@@ -7,6 +7,8 @@ import javax.swing.SwingUtilities;
 public class Pusher {
 
     private static Champs champs;
+    
+    // TODO Champs directement sur TaskPlay et non ici
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new TaskDisplay());

@@ -15,6 +15,8 @@ public class TaskDisplay extends KeyAdapter implements Runnable {
     public static JPanelEditor editorPanel;
     public static HomeMenu     home;
 
+    // TODO Static à enlever
+    
     public void run() {
         frame = new JFrame();
         home = new HomeMenu();
@@ -27,7 +29,7 @@ public class TaskDisplay extends KeyAdapter implements Runnable {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void keyReleased(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         if (!TaskPlay.inMovement) {
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 TaskPlay.timer = new Timer();
@@ -46,14 +48,19 @@ public class TaskDisplay extends KeyAdapter implements Runnable {
                 TaskPlay.timer.schedule(TaskPlay.timerTask(0, 1), 0, 100);
             }
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                TaskPlay.caught = !TaskPlay.caught;
-                TaskPlay.setPlayingList();
+            	if(TaskPlay.isNearPlayableBlock(TaskPlay.champs.getPlayer().getPosition())){
+            		TaskPlay.caught = !TaskPlay.caught;
+            		TaskPlay.setPlayingList();
+            	}
                 
             }
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            	if(frame.getContentPane().equals(gamePanel))
-            		new JFramePause();
-            }
+        }
+    }
+    
+    public void keyReleased(KeyEvent e){
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        	if(frame.getContentPane().equals(gamePanel))
+        		new JFramePause();
         }
     }
 

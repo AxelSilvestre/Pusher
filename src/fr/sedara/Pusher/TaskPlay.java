@@ -1,11 +1,12 @@
 package fr.sedara.Pusher;
 
-import fr.sedara.Pusher.Display.JFrameEndGame;
-import fr.sedara.Pusher.Display.TaskDisplay;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import fr.sedara.Pusher.Display.JFrameEndGame;
+import fr.sedara.Pusher.Display.TaskDisplay;
 
 public class TaskPlay {
 
@@ -13,9 +14,11 @@ public class TaskPlay {
     public static Timer   timer;
     public static boolean caught;
     public static boolean inMovement;
-    public static ArrayList<Case> playingCases;
-    public static ArrayList<Case> objectives;
+    public static List<Case> playingCases;
+    public static List<Case> objectives;
     public static String currentLevel;
+    
+    // TODO Static à enlever
 
     public static void start() {
         caught = false;
@@ -83,9 +86,10 @@ public class TaskPlay {
     public static TimerTask timerTask(final int dirX, final int dirY) {
 
         TimerTask tm = new TimerTask() {
-
+        	@Override
             public void run() {
-                if (TaskPlay.playerForward(dirX, dirY)) {
+                
+        		if (TaskPlay.playerForward(dirX, dirY)) {
                     TaskDisplay.gamePanel.setColor();
                 }
                 else {
@@ -113,7 +117,7 @@ public class TaskPlay {
     	
     }
 
-    private static boolean isNearPlayableBlock(Position position) {
+    public static boolean isNearPlayableBlock(Position position) {
         Case cc;
         int tab[] = {-1, 0, 1};
         for (int i = 0; i < 3; i++) {
@@ -125,7 +129,7 @@ public class TaskPlay {
         return false;
     }
 
-    private static void playerWithPlayableBlocksForward(ArrayList<Case> blocks, int dirX, int dirY) {
+    private static void playerWithPlayableBlocksForward(List<Case> blocks, int dirX, int dirY) {
         int size = blocks.size();
         Object tab[][] = new Object[size][2];
         int i = 0;        
@@ -152,11 +156,13 @@ public class TaskPlay {
 
     }
 
-    private static boolean isMovableList(ArrayList<Case> blocks, int dirX, int dirY) {
+    private static boolean isMovableList(List<Case> blocks, int dirX, int dirY) {
     	boolean b = true;
     	if(blocks == null) return false;
         for (Case c : blocks) {
+        	try{
             Case cc = champs.getCase(c.getPosition().getX() + dirX, c.getPosition().getY() + dirY);
+        	
             if(cc.getType() == Type.BREAKABLE){
             	cc.setType(Type.NULL);
             	b = false;
@@ -164,14 +170,16 @@ public class TaskPlay {
             if(cc.getType() == Type.OBJETIVE && c.getType() == Type.PLAYER)
             	return false;
             if(cc.getType() == Type.DEADLY && c.getType() == Type.PLAYER){
+            	c.setType(Type.NULL);
             	timer.purge();
             	timer.cancel();
             	new JFrameEndGame(false);
             	return false;
             }
+            
             if (cc.getType() != Type.NULL && !blocks.contains(cc) && cc.getType() != Type.OBJETIVE) 
                 return false;
-
+        	}catch(ArrayIndexOutOfBoundsException e){}
             
         }
         return b;

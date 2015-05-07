@@ -2,6 +2,7 @@ package fr.sedara.Pusher;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Champs implements Serializable {
 
@@ -56,8 +57,8 @@ public class Champs implements Serializable {
         return null;
     }
     
-    public ArrayList<Case> getObjectives(){
-    	ArrayList<Case> list = new ArrayList<Case>();
+    public List<Case> getObjectives(){
+    	List<Case> list = new ArrayList<Case>();
     	Case c;
     	for(int i = 0; i < x; i++){
     		for(int j = 0; j < y; j++){
