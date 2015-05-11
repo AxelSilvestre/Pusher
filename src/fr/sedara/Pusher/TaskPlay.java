@@ -118,13 +118,14 @@ public class TaskPlay {
     }
 
     public static boolean isNearPlayableBlock(Position position) {
-        Case cc;
-        int tab[] = {-1, 0, 1};
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cc = champs.getCase(position.getX() + tab[i], position.getY() + tab[j]);
-                if (cc.getType() == Type.PLAYABLE_BLOCK) { return true; }
-            }
+        Case c;
+        int tab[][] = {{-1,0} , {1,0}, {0,-1} , {0,1}};
+        for (int i = 0; i < 4; i++) {
+        	c = champs.getCase(position.getX() + tab[i][0], position.getY() + tab[i][1]);
+        	if (c.getType() == Type.PLAYABLE_BLOCK) {
+        		return true;
+        	}
+
         }
         return false;
     }
@@ -185,11 +186,11 @@ public class TaskPlay {
         return b;
     }
     
-    private static ArrayList<Case> getAllPlayableBlocks(Position position){
-        ArrayList<Case> list = new ArrayList<Case>();
-        ArrayList<Case> tempList = new ArrayList<Case>();
-        ArrayList<Case> tested = new ArrayList<Case>();
-        ArrayList<Case> tempList2 = new ArrayList<Case>();
+    private static List<Case> getAllPlayableBlocks(Position position){
+        List<Case> list = new ArrayList<Case>();
+        List<Case> tempList = new ArrayList<Case>();
+        List<Case> tested = new ArrayList<Case>();
+        List<Case> tempList2 = new ArrayList<Case>();
         
 		tempList2 = getClosePlayableBlocks(position);
 
@@ -216,7 +217,7 @@ public class TaskPlay {
 		return list;    	
     }
 
-    private static ArrayList<Case> getClosePlayableBlocks(Position position) {
+    private static List<Case> getClosePlayableBlocks(Position position) {
         ArrayList<Case> list = new ArrayList<Case>();
         Case c;
         int tab[][] = {{-1,0} , {1,0}, {0,-1} , {0,1}};
