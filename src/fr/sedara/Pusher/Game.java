@@ -8,26 +8,32 @@ import java.util.TimerTask;
 import fr.sedara.Pusher.Display.JFrameEndGame;
 import fr.sedara.Pusher.Display.TaskDisplay;
 
-public class TaskPlay {
+public class Game {
 
-    public static Champs  champs;
-    public static Timer   timer;
-    public static boolean caught;
-    public static boolean inMovement;
-    public static List<Case> playingCases;
-    public static List<Case> objectives;
-    public static String currentLevel;
+    private Champs  champs;
+    private Timer   timer;
+    private boolean caught;
+    private boolean inMovement;
+    private List<Case> playingCases;
+    private List<Case> objectives;
+    private String currentLevel;
     
-    // TODO Static à enlever
-
-    public static void start() {
+    public Game() {
+        this(new Champs());
+    }
+    
+    public Game(int x, int y){
+        this(new Champs(x,y));
+    }
+    
+    public Game(Champs champs){
         caught = false;
-        champs = Pusher.getChamps();
+        this.champs = champs;
         inMovement = false;
         objectives = champs.getObjectives();
     }
 
-    public static boolean playerForward(int dirX, int dirY) {
+    public boolean playerForward(int dirX, int dirY) {
         inMovement = true;
         Case firstCase = champs.getPlayer();
         try {
@@ -83,13 +89,13 @@ public class TaskPlay {
         return false;
     }
 
-    public static TimerTask timerTask(final int dirX, final int dirY) {
+    public TimerTask timerTask(final int dirX, final int dirY) {
 
         TimerTask tm = new TimerTask() {
         	@Override
             public void run() {
                 
-        		if (TaskPlay.playerForward(dirX, dirY)) {
+        		if (playerForward(dirX, dirY)) {
                     TaskDisplay.gamePanel.setColor();
                 }
                 else {
@@ -108,7 +114,7 @@ public class TaskPlay {
         return tm;
     }
     
-    public static void setPlayingList(){
+    public void setPlayingList(){
 		Position p = champs.getPlayer().getPosition();
     	if(caught && isNearPlayableBlock(p))
     		playingCases = getAllPlayableBlocks(p);
@@ -117,7 +123,7 @@ public class TaskPlay {
     	
     }
 
-    public static boolean isNearPlayableBlock(Position position) {
+    public boolean isNearPlayableBlock(Position position) {
         Case c;
         int tab[][] = {{-1,0} , {1,0}, {0,-1} , {0,1}};
         for (int i = 0; i < 4; i++) {
@@ -130,7 +136,7 @@ public class TaskPlay {
         return false;
     }
 
-    private static void playerWithPlayableBlocksForward(List<Case> blocks, int dirX, int dirY) {
+    private void playerWithPlayableBlocksForward(List<Case> blocks, int dirX, int dirY) {
         int size = blocks.size();
         Object tab[][] = new Object[size][2];
         int i = 0;        
@@ -157,7 +163,7 @@ public class TaskPlay {
 
     }
 
-    private static boolean isMovableList(List<Case> blocks, int dirX, int dirY) {
+    private boolean isMovableList(List<Case> blocks, int dirX, int dirY) {
     	boolean b = true;
     	if(blocks == null) return false;
         for (Case c : blocks) {
@@ -186,7 +192,7 @@ public class TaskPlay {
         return b;
     }
     
-    private static List<Case> getAllPlayableBlocks(Position position){
+    private List<Case> getAllPlayableBlocks(Position position){
         List<Case> list = new ArrayList<Case>();
         List<Case> tempList = new ArrayList<Case>();
         List<Case> tested = new ArrayList<Case>();
@@ -217,7 +223,7 @@ public class TaskPlay {
 		return list;    	
     }
 
-    private static List<Case> getClosePlayableBlocks(Position position) {
+    private List<Case> getClosePlayableBlocks(Position position) {
         ArrayList<Case> list = new ArrayList<Case>();
         Case c;
         int tab[][] = {{-1,0} , {1,0}, {0,-1} , {0,1}};
@@ -232,5 +238,63 @@ public class TaskPlay {
         return list;
     }
 
+	public Champs getChamps() {
+		return champs;
+	}
 
+	public void setChamps(Champs champs) {
+		this.champs = champs;
+	}
+
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+
+	public boolean isCaught() {
+		return caught;
+	}
+
+	public void setCaught(boolean caught) {
+		this.caught = caught;
+	}
+
+	public boolean isInMovement() {
+		return inMovement;
+	}
+
+	public void setInMovement(boolean inMovement) {
+		this.inMovement = inMovement;
+	}
+
+	public List<Case> getPlayingCases() {
+		return playingCases;
+	}
+
+	public void setPlayingCases(List<Case> playingCases) {
+		this.playingCases = playingCases;
+	}
+
+	public List<Case> getObjectives() {
+		return objectives;
+	}
+
+	public void setObjectives(List<Case> objectives) {
+		this.objectives = objectives;
+	}
+
+	public String getCurrentLevel() {
+		return currentLevel;
+	}
+
+	public void setCurrentLevel(String currentLevel) {
+		this.currentLevel = currentLevel;
+	}
+
+
+    
+    
 }

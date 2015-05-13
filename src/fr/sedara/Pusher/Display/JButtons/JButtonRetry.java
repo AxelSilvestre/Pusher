@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import fr.sedara.Pusher.Champs;
 import fr.sedara.Pusher.LevelFileManager;
 import fr.sedara.Pusher.Pusher;
-import fr.sedara.Pusher.TaskPlay;
+import fr.sedara.Pusher.Game;
 import fr.sedara.Pusher.Display.JPanelGame;
 import fr.sedara.Pusher.Display.TaskDisplay;
 
@@ -30,7 +30,7 @@ public class JButtonRetry extends JButton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
         Champs c = null;
         try {
-            c = LevelFileManager.load(TaskPlay.currentLevel);
+            c = LevelFileManager.load(Game.currentLevel);
         }
         catch (ClassNotFoundException e1) {}
         catch (IOException e1) {}
@@ -41,7 +41,7 @@ public class JButtonRetry extends JButton implements ActionListener{
         TaskDisplay.frame.revalidate();
 		TaskDisplay.frame.setEnabled(true);
 		TaskDisplay.frame.toFront();
-		TaskPlay.start();
+		Game.start();
 		frame.dispose();
 		frame.setState(JFrame.EXIT_ON_CLOSE);
 		

@@ -5,7 +5,7 @@ import fr.sedara.Pusher.Display.JPanelGame;
 import fr.sedara.Pusher.Display.TaskDisplay;
 import fr.sedara.Pusher.LevelFileManager;
 import fr.sedara.Pusher.Pusher;
-import fr.sedara.Pusher.TaskPlay;
+import fr.sedara.Pusher.Game;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -39,8 +39,8 @@ public class JButtonPlayLevel extends JButton implements ActionListener {
             TaskDisplay.frame.setLocationRelativeTo(null);
             TaskDisplay.frame.requestFocusInWindow();
             TaskDisplay.frame.revalidate();
-            TaskPlay.currentLevel = fileName;
-            TaskPlay.start();
+            Game.currentLevel = fileName;
+            Game.start();
 
         }
 
