@@ -16,11 +16,13 @@ public class JButtonDeleteLevel extends JButton implements ActionListener {
 
     private String fileName;
     private JFrame current;
+    private final TaskDisplay taskDisplay;
 
-    public JButtonDeleteLevel(JFrame currentFrame) {
+    public JButtonDeleteLevel(JFrame currentFrame, TaskDisplay taskDisplay) {
         super("Supprimer");
         fileName = "";
         current = currentFrame;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
@@ -29,8 +31,8 @@ public class JButtonDeleteLevel extends JButton implements ActionListener {
             LevelFileManager.delete(fileName);
             current.dispose();
             current.setState(JFrame.EXIT_ON_CLOSE);
-            TaskDisplay.frame.toFront();
-            new JFrameEditorChooseLevel();
+            taskDisplay.frame.toFront();
+            new JFrameEditorChooseLevel(taskDisplay);
         }
     }
 

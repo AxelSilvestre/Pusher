@@ -14,7 +14,7 @@ public class JOptionPaneOverwriteLevel extends JOptionPane{
 
 	private static final long serialVersionUID = 1L;
 
-	public JOptionPaneOverwriteLevel(JFrame frame, String fileName) {
+	public JOptionPaneOverwriteLevel(JFrame frame, String fileName, TaskDisplay taskDisplay) {
 		frame.setEnabled(false);
 		final JOptionPane jo = new JOptionPane("Le niveau existe déjà, voulez vous l'écraser?", JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
 		final JDialog jd = new JDialog(frame,"Attention!",true);
@@ -41,12 +41,12 @@ public class JOptionPaneOverwriteLevel extends JOptionPane{
 			frame.dispose();
 			frame.setState(JFrame.EXIT_ON_CLOSE);
             try {
-                LevelFileManager.save(TaskDisplay.editorPanel.getChamps(), fileName);
+                LevelFileManager.save(taskDisplay.editorPanel.getChamps(), fileName);
             }catch (IOException e1) {}
-            TaskDisplay.frame.toFront();
-            TaskDisplay.frame.setEnabled(true);
+            taskDisplay.frame.toFront();
+            taskDisplay.frame.setEnabled(true);
 		}else if (value == JOptionPane.CANCEL_OPTION) {
-			TaskDisplay.frame.toFront();
+			taskDisplay.frame.toFront();
 			frame.setEnabled(true);
 			frame.toFront();
 			frame.revalidate();

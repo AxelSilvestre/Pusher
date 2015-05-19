@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 public class JButtonEditLevel extends JButton implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    
+    // TODO this
 
     public JButtonEditLevel() {
         super("Ouvrir");

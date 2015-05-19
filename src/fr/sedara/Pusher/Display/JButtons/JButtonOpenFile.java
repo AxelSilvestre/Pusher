@@ -16,16 +16,19 @@ public class JButtonOpenFile extends JButton implements ActionListener {
     private static final long serialVersionUID = 1L;
     private String fileName;
     private JFrame current;
+    private final TaskDisplay taskDisplay;
 
-    public JButtonOpenFile(JFrame currentFrame) {
+    public JButtonOpenFile(JFrame currentFrame, TaskDisplay taskDisplay) {
         super("Ouvrir");
         current = currentFrame;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
-    public JButtonOpenFile() {
+    public JButtonOpenFile( TaskDisplay taskDisplay) {
         super("Ouvrir");
         current = null;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
@@ -34,17 +37,17 @@ public class JButtonOpenFile extends JButton implements ActionListener {
             current.dispose();
             current.setState(JFrame.EXIT_ON_CLOSE);
             try {
-                TaskDisplay.editorPanel = new JPanelEditor(LevelFileManager.load(fileName));
+                taskDisplay.editorPanel = new JPanelEditor(LevelFileManager.load(fileName), taskDisplay);
             }
             catch (ClassNotFoundException e1) {}
             catch (IOException e1) {}
-            TaskDisplay.frame.setContentPane(TaskDisplay.editorPanel);
-            TaskDisplay.frame.setEnabled(true);
-            TaskDisplay.frame.toFront();
-            TaskDisplay.frame.revalidate();
+            taskDisplay.frame.setContentPane(taskDisplay.editorPanel);
+            taskDisplay.frame.setEnabled(true);
+            taskDisplay.frame.toFront();
+            taskDisplay.frame.revalidate();
         }
         else {
-            new JFrameEditorChooseLevel();
+            new JFrameEditorChooseLevel(taskDisplay);
         }
     }
 

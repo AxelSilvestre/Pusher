@@ -4,8 +4,6 @@ import fr.sedara.Pusher.Champs;
 import fr.sedara.Pusher.Display.JPanelGame;
 import fr.sedara.Pusher.Display.TaskDisplay;
 import fr.sedara.Pusher.LevelFileManager;
-import fr.sedara.Pusher.Pusher;
-import fr.sedara.Pusher.Game;
 
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -16,10 +14,12 @@ public class JButtonPlayLevel extends JButton implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private String fileName;
+    private final TaskDisplay taskDisplay;
 
-    public JButtonPlayLevel() {
+    public JButtonPlayLevel(TaskDisplay taskDisplay) {
         super("Jouer");
         fileName = "";
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
@@ -31,16 +31,16 @@ public class JButtonPlayLevel extends JButton implements ActionListener {
             }
             catch (ClassNotFoundException e1) {}
             catch (IOException e1) {}
-            Pusher.setChamps(c);
-            JPanelGame j = new JPanelGame(c);
-            TaskDisplay.gamePanel = j;
-            TaskDisplay.frame.setContentPane(j);
-            TaskDisplay.frame.setSize(j.getChamps().getX() * 50, j.getChamps().getY() * 50);
-            TaskDisplay.frame.setLocationRelativeTo(null);
-            TaskDisplay.frame.requestFocusInWindow();
-            TaskDisplay.frame.revalidate();
-            Game.currentLevel = fileName;
-            Game.start();
+            JPanelGame j = new JPanelGame(c, taskDisplay);
+            taskDisplay.getController().createNewGame(c, fileName);
+            taskDisplay.setKeyListener();
+            taskDisplay.gamePanel = j;
+            taskDisplay.frame.setContentPane(j);
+            taskDisplay.frame.setSize(j.getChamps().getX() * 50, j.getChamps().getY() * 50);
+            taskDisplay.frame.setLocationRelativeTo(null);            
+            taskDisplay.frame.requestFocusInWindow();
+            taskDisplay.frame.revalidate();
+            
 
         }
 

@@ -20,7 +20,7 @@ public class JFrameNameAsker extends JFrame {
     private JButtonValidateName validate;
 
 
-    public JFrameNameAsker() {
+    public JFrameNameAsker(TaskDisplay taskDisplay) {
         jPanel = new JPanel();
         label = new JLabel("<html>Saisissez le nom de votre niveau:</html>");
         label.setPreferredSize(new Dimension(250, 50));
@@ -28,16 +28,16 @@ public class JFrameNameAsker extends JFrame {
         jTextField = new JTextField();
         jTextField.setPreferredSize(new Dimension(250, 30));
         jPanel.add(jTextField);
-        validate = new JButtonValidateName(jTextField, this);
+        validate = new JButtonValidateName(jTextField, this, taskDisplay);
         jPanel.add(validate);
-        jButtonCancel = new JButtonCancel(this);
+        jButtonCancel = new JButtonCancel(this, taskDisplay);
         jPanel.add(jButtonCancel);
         add(jPanel);
         setLocationRelativeTo(null);
         setSize(300, 200);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         setVisible(true);
-        TaskDisplay.frame.setEnabled(false);
+        taskDisplay.frame.setEnabled(false);
     }
 
     public JLabel getLabel() {

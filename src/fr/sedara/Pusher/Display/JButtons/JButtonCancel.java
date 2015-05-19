@@ -13,32 +13,37 @@ public class JButtonCancel extends JButton implements ActionListener {
 
     private JFrame  frameToClose;
     private boolean home;
+    private final TaskDisplay taskDisplay;
 
-    public JButtonCancel(boolean home) {
+    public JButtonCancel(boolean home, TaskDisplay taskDisplay) {
         setText("Annuler");
         frameToClose = null;
         this.home = home;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
-    public JButtonCancel(JFrame frameToClose) {
+    public JButtonCancel(JFrame frameToClose, TaskDisplay taskDisplay) {
         setText("Annuler");
         this.frameToClose = frameToClose;
         home = false;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
     
-    public JButtonCancel(JFrame frameToClose, boolean home) {
+    public JButtonCancel(JFrame frameToClose, boolean home, TaskDisplay taskDisplay) {
         setText("Menu principal");
         this.frameToClose = frameToClose;
         this.home = home;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
     
-    public JButtonCancel(JFrame frameToClose, boolean home, String text) {
+    public JButtonCancel(JFrame frameToClose, boolean home, String text, TaskDisplay taskDisplay) {
         setText(text);
         this.frameToClose = frameToClose;
         this.home = home;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
@@ -48,13 +53,13 @@ public class JButtonCancel extends JButton implements ActionListener {
             frameToClose.setState(JFrame.EXIT_ON_CLOSE);
         }
         if (home) {
-            TaskDisplay.frame.setContentPane(TaskDisplay.home);
-            TaskDisplay.frame.setSize(200, 200);
-            TaskDisplay.frame.setLocationRelativeTo(null);           
+            taskDisplay.frame.setContentPane(taskDisplay.home);
+            taskDisplay.frame.setSize(200, 200);
+            taskDisplay.frame.setLocationRelativeTo(null);           
         }
-        TaskDisplay.frame.setEnabled(true);
-        TaskDisplay.frame.revalidate();
-        TaskDisplay.frame.toFront();
+        taskDisplay.frame.setEnabled(true);
+        taskDisplay.frame.revalidate();
+        taskDisplay.frame.toFront();
 
     }
 

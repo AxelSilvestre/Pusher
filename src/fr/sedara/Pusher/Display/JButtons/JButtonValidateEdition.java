@@ -11,15 +11,18 @@ import java.awt.event.ActionListener;
 public class JButtonValidateEdition extends JButton implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    
+    private final TaskDisplay taskDisplay;
 
-    public JButtonValidateEdition() {
+    public JButtonValidateEdition(TaskDisplay taskDisplay) {
         setText("Valider");
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        TaskDisplay.frame.setEnabled(false);
-        new JFrameNameAsker();
+        taskDisplay.frame.setEnabled(false);
+        new JFrameNameAsker(taskDisplay);
 
     }
 

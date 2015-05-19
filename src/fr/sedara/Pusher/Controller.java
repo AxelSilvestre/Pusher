@@ -11,7 +11,6 @@ public class Controller {
 	// TODO Deux interfaces pour modèle et vue
 	
 	public Controller() {
-		game = new Game(this);
 		display = new TaskDisplay(this);
 		SwingUtilities.invokeLater(display);
 	}
@@ -20,4 +19,19 @@ public class Controller {
 		game = new Game(this);
 	}
 	
+	public void createNewGame(Champs champs, String levelName) {
+		game = new Game(champs, levelName, this);
+	}
+	
+	public void refreshView(){
+		display.gamePanel.setColor();
+	}
+	
+	public Game getGame() {
+		return game;
+	}
+	
+	public void endGame(boolean win){
+		display.endGame(win);
+	}
 }

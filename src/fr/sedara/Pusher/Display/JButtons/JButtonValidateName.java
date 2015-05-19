@@ -17,14 +17,15 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 public class JButtonValidateName extends JButton implements ActionListener {
 
-    JTextField      field;
-    JFrameNameAsker current;
-    int             rank;
+    private JTextField      field;
+    private JFrameNameAsker current;
+    private final TaskDisplay taskDisplay;
 
-    public JButtonValidateName(JTextField textField, JFrameNameAsker currentFrame) {
+    public JButtonValidateName(JTextField textField, JFrameNameAsker currentFrame, TaskDisplay taskDisplay) {
         super("Valider");
         field = textField;
         current = currentFrame;
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
@@ -35,19 +36,19 @@ public class JButtonValidateName extends JButton implements ActionListener {
             String[] list = folder.list();
             for (String str : list) {
                 if ((field.getText() + ".Plvl").equalsIgnoreCase(str)) {
-                    new JOptionPaneOverwriteLevel(current, field.getText());
+                    new JOptionPaneOverwriteLevel(current, field.getText(), taskDisplay);
                     return;
                 }
             }
 
             try {
-                LevelFileManager.save(TaskDisplay.editorPanel.getChamps(), field.getText());
+                LevelFileManager.save(taskDisplay.editorPanel.getChamps(), field.getText());
             }
             catch (IOException e1) {}
             current.dispose();
             current.setState(JFrame.EXIT_ON_CLOSE);
-            TaskDisplay.frame.toFront();
-            TaskDisplay.frame.setEnabled(true);
+            taskDisplay.frame.toFront();
+            taskDisplay.frame.setEnabled(true);
 
         }
 

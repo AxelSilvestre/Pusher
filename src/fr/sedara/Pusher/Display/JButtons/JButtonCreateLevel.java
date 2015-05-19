@@ -11,21 +11,23 @@ import java.awt.event.ActionListener;
 public class JButtonCreateLevel extends JButton implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    private final TaskDisplay taskDisplay;
 
 
-    public JButtonCreateLevel() {
+    public JButtonCreateLevel(TaskDisplay taskDisplay) {
         setText("Créer un niveau");
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        TaskDisplay.editorPanel = new JPanelEditor(new Champs());
-        TaskDisplay.frame.setContentPane(TaskDisplay.editorPanel);
-        TaskDisplay.frame.setSize(TaskDisplay.editorPanel.getChamps().getX() * 50 + 100,
-                                  TaskDisplay.editorPanel.getChamps().getY() * 50);
-        TaskDisplay.frame.setLocationRelativeTo(null);
-        TaskDisplay.frame.revalidate();
+        taskDisplay.editorPanel = new JPanelEditor(new Champs(), taskDisplay);
+        taskDisplay.frame.setContentPane(taskDisplay.editorPanel);
+        taskDisplay.frame.setSize(taskDisplay.editorPanel.getChamps().getX() * 50 + 100,
+                                  taskDisplay.editorPanel.getChamps().getY() * 50);
+        taskDisplay.frame.setLocationRelativeTo(null);
+        taskDisplay.frame.revalidate();
     }
 
 

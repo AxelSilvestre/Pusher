@@ -13,14 +13,17 @@ public class JFramePause extends JFrame implements KeyListener{
 
 	private static final long serialVersionUID = 1L;
 	
+	private final TaskDisplay taskDisplay;
 	
-	public JFramePause() {
+	
+	public JFramePause(TaskDisplay taskDisplay) {
 		super("Pause");
-		TaskDisplay.frame.setEnabled(false);
+		this.taskDisplay = taskDisplay;
+		taskDisplay.frame.setEnabled(false);
 		JPanel jp = new JPanel();
-		JButtonCancel home = new JButtonCancel(this, true);
-		JButtonCancel cancel = new JButtonCancel(this, false, "Reprendre");
-		JButtonRetry retry = new JButtonRetry(this);
+		JButtonCancel home = new JButtonCancel(this, true, taskDisplay);
+		JButtonCancel cancel = new JButtonCancel(this, false, "Reprendre", taskDisplay);
+		JButtonRetry retry = new JButtonRetry(this, taskDisplay);
 		jp.add(cancel);
 		jp.add(retry);
 		jp.add(home);
@@ -37,14 +40,13 @@ public class JFramePause extends JFrame implements KeyListener{
 
 
 	public void keyPressed(KeyEvent e) {
-		
 	}
 
 
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-			TaskDisplay.frame.setEnabled(true);
-			TaskDisplay.frame.requestFocusInWindow();
+			taskDisplay.frame.setEnabled(true);
+			taskDisplay.frame.requestFocusInWindow();
 			dispose();
 			setState(JFrame.EXIT_ON_CLOSE);
 		}

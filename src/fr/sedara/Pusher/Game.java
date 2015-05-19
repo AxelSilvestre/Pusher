@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import fr.sedara.Pusher.Display.JFrameEndGame;
-import fr.sedara.Pusher.Display.TaskDisplay;
-
 public class Game {
 
     private Champs  champs;
@@ -17,20 +14,23 @@ public class Game {
     private List<Case> playingCases;
     private List<Case> objectives;
     private String currentLevel;
+    private final Controller controller;
     
-    public Game() {
-        this(new Champs());
+    public Game(Controller controller) {
+        this(new Champs(),"default", controller);
     }
     
-    public Game(int x, int y){
-        this(new Champs(x,y));
+    public Game(int x, int y, Controller controller){
+        this(new Champs(x,y),"default", controller);
     }
     
-    public Game(Champs champs){
+    public Game(Champs champs, String levelName, Controller controller){
         caught = false;
         this.champs = champs;
         inMovement = false;
         objectives = champs.getObjectives();
+        this.controller = controller;
+        currentLevel = levelName;
     }
 
     public boolean playerForward(int dirX, int dirY) {
@@ -64,7 +64,7 @@ public class Game {
                     inMovement = false;
                     timer.cancel();
                     timer.purge();
-                    new JFrameEndGame(false);
+                    controller.endGame(false);
                     return false;
                 }
                 if (endCase.getType() == Type.BREAKABLE) {
@@ -82,7 +82,7 @@ public class Game {
             inMovement = false;
             timer.cancel();
             timer.purge();
-            new JFrameEndGame(false);
+            controller.endGame(false);
         }
 
         inMovement = false;
@@ -96,17 +96,17 @@ public class Game {
             public void run() {
                 
         		if (playerForward(dirX, dirY)) {
-                    TaskDisplay.gamePanel.setColor();
+                    controller.refreshView();
                 }
                 else {
-                    TaskDisplay.gamePanel.setColor();
+                	controller.refreshView();
                     timer.cancel();
                     timer.purge();
                 }
                 if(objectives.isEmpty()){
                 	timer.cancel();
                     timer.purge();
-                	new JFrameEndGame(true);
+                	controller.endGame(true);
                 }
             }
 
@@ -180,7 +180,7 @@ public class Game {
             	c.setType(Type.NULL);
             	timer.purge();
             	timer.cancel();
-            	new JFrameEndGame(false);
+            	controller.endGame(false);
             	return false;
             }
             

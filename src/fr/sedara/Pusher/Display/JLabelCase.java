@@ -15,7 +15,10 @@ public class JLabelCase extends JLabel implements MouseListener {
 
     private Case c;
 
-    public JLabelCase(Case c, boolean edit) {
+    private TaskDisplay taskDisplay;
+    
+    public JLabelCase(Case c, boolean edit, TaskDisplay taskDisplay) {
+    	this.taskDisplay = taskDisplay;
         this.c = c;
         setOpaque(true);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -32,10 +35,10 @@ public class JLabelCase extends JLabel implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        if (TaskDisplay.editorPanel.getSelectedType() != null) {
-            c.setType(TaskDisplay.editorPanel.getSelectedType());
-        	if(TaskDisplay.editorPanel.getSelectedType() == Type.PLAYER)
-            	TaskDisplay.editorPanel.setSelectedType(null);
+        if (taskDisplay.editorPanel.getSelectedType() != null) {
+            c.setType(taskDisplay.editorPanel.getSelectedType());
+        	if(taskDisplay.editorPanel.getSelectedType() == Type.PLAYER)
+            	taskDisplay.editorPanel.setSelectedType(null);
             setColor();
         }
     }

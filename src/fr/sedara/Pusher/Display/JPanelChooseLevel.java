@@ -21,7 +21,7 @@ public class JPanelChooseLevel extends JPanel implements ListSelectionListener {
     private JList<String>      jl;
     private JButtonPlayLevel   play;
 
-    public JPanelChooseLevel() {
+    public JPanelChooseLevel(TaskDisplay taskDisplay) {
         File folder = new File("Levels");
         String[] list = folder.list();
         DefaultListModel<String> dlm = new DefaultListModel<String>();
@@ -36,14 +36,14 @@ public class JPanelChooseLevel extends JPanel implements ListSelectionListener {
         add(scroll);
         scroll.setPreferredSize(new Dimension(100, 300));
         JSplitPane jsp = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-        play = new JButtonPlayLevel();
+        play = new JButtonPlayLevel(taskDisplay);
         jsp.add(play);
-        JButtonCancel cancel = new JButtonCancel(true);
+        JButtonCancel cancel = new JButtonCancel(true, taskDisplay);
         jsp.add(cancel);
         jsp.setDividerSize(0);
         add(jsp);
-        TaskDisplay.frame.setSize(400, 350);
-        TaskDisplay.frame.setLocationRelativeTo(null);
+        taskDisplay.frame.setSize(400, 350);
+        taskDisplay.frame.setLocationRelativeTo(null);
     }
 
     public void valueChanged(ListSelectionEvent e) {

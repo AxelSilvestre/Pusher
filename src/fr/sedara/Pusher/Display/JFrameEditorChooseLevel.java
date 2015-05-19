@@ -25,7 +25,7 @@ public class JFrameEditorChooseLevel extends JFrame implements ListSelectionList
     private JButtonDeleteLevel 	delete;
     private	JButtonCancel		cancel;
 
-    public JFrameEditorChooseLevel() {
+    public JFrameEditorChooseLevel(TaskDisplay taskDisplay) {
         File folder = new File("Levels");
         String[] list = folder.list();
         DefaultListModel<String> dlm = new DefaultListModel<String>();
@@ -41,9 +41,9 @@ public class JFrameEditorChooseLevel extends JFrame implements ListSelectionList
         JSplitPane jsp2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         JSplitPane jsp3 = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         jsp.add(scroll);
-        open   = new JButtonOpenFile(this);
-        delete = new JButtonDeleteLevel(this);
-        cancel = new JButtonCancel(this);
+        open   = new JButtonOpenFile(this, taskDisplay);
+        delete = new JButtonDeleteLevel(this, taskDisplay);
+        cancel = new JButtonCancel(this, taskDisplay);
         jsp3.add(delete);
         jsp3.add(cancel);
         jsp2.add(open);
@@ -57,7 +57,7 @@ public class JFrameEditorChooseLevel extends JFrame implements ListSelectionList
         pack();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setVisible(true);
-        TaskDisplay.frame.setEnabled(false);
+        taskDisplay.frame.setEnabled(false);
         setLocationRelativeTo(null);
         setResizable(false);
         toFront();

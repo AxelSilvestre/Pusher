@@ -14,20 +14,10 @@ import java.awt.Insets;
 @SuppressWarnings("serial")
 public class JChoosePanel extends JPanel {
 
-    //	private JLabel player;
-    //	private JLabel wall;
-    //	private JLabel playable_block;
-    //	private JLabel deadly;
-    //	private JLabel breakable;
-    //	private ImageIcon playerIcon = new ImageIcon("icons/player.png");
-    //	private ImageIcon wallIcon = new ImageIcon("icons/wall.png");
-    //	private ImageIcon playableIcon = new ImageIcon("icons/playable.png");
-    //	private ImageIcon deadlyIcon = new ImageIcon("icons/deadly.png");
-    //	private ImageIcon breakableIcon = new ImageIcon("icons/breakable.png");
     private JPanelEditor editor;
     private JLabel warning;
 
-    public JChoosePanel(JPanelEditor editor) {
+    public JChoosePanel(JPanelEditor editor, TaskDisplay taskDisplay) {
         this.editor = editor;
         JLabelChoose jl;
         JLabel name;
@@ -38,7 +28,7 @@ public class JChoosePanel extends JPanel {
         gbc.weighty = Type.NUMBER_OF_BLOCKS + 2;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(new JButtonOpenFile(), gbc);
+        add(new JButtonOpenFile(taskDisplay), gbc);
         gbc.gridx = 1;
         warning = new JLabel();
         add(warning, gbc);
@@ -54,9 +44,9 @@ public class JChoosePanel extends JPanel {
         }
         gbc.gridx = 0;
         gbc.gridy++;
-        add(new JButtonValidateEdition(), gbc);
+        add(new JButtonValidateEdition(taskDisplay), gbc);
         gbc.gridx = 1;
-        add(new JButtonCancel(true), gbc);
+        add(new JButtonCancel(true, taskDisplay), gbc);
 
 
     }

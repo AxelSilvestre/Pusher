@@ -10,17 +10,19 @@ import java.awt.event.ActionListener;
 public class JButtonPlay extends JButton implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    private final TaskDisplay taskDisplay;
 
 
-    public JButtonPlay() {
+    public JButtonPlay(TaskDisplay taskDisplay) {
         setText("Jouer");
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        TaskDisplay.frame.setContentPane(new JPanelChooseLevel());
-        TaskDisplay.frame.revalidate();
+        taskDisplay.frame.setContentPane(new JPanelChooseLevel(taskDisplay));
+        taskDisplay.frame.revalidate();
     }
 
 

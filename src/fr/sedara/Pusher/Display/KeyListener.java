@@ -49,7 +49,7 @@ public class KeyListener extends KeyAdapter {
 	public void keyReleased(KeyEvent e){
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			if(taskDisplay.frame.getContentPane().equals(taskDisplay.gamePanel))
-				new JFramePause();
+				new JFramePause(taskDisplay);
 		}
 	}
 

@@ -10,16 +10,18 @@ import java.awt.event.ActionListener;
 public class JButtonQuit extends JButton implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    private final TaskDisplay taskDisplay;
 
-    public JButtonQuit() {
+    public JButtonQuit(TaskDisplay taskDisplay) {
         super("Quitter");
+        this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        TaskDisplay.frame.dispose();
-        TaskDisplay.frame.setState(JFrame.EXIT_ON_CLOSE);
+        taskDisplay.frame.dispose();
+        taskDisplay.frame.setState(JFrame.EXIT_ON_CLOSE);
     }
 
 

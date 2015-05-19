@@ -16,7 +16,7 @@ public class JPanelEditor extends JSplitPane {
     private JChoosePanel   choosePanel;
     private Type           selectedType;
 
-    public JPanelEditor(Champs champs) {
+    public JPanelEditor(Champs champs, TaskDisplay taskDisplay) {
         super(JSplitPane.HORIZONTAL_SPLIT);
         this.champs = champs;
         JPanel pan = new JPanel();
@@ -24,13 +24,13 @@ public class JPanelEditor extends JSplitPane {
         tableau = new JLabelCase[champs.getX()][champs.getY()];
         for (int i = 0; i < champs.getY(); i++) {
             for (int j = 0; j < champs.getX(); j++) {
-                tableau[j][i] = new JLabelCase(champs.getCase(j, i), true);
+                tableau[j][i] = new JLabelCase(champs.getCase(j, i), true, taskDisplay);
                 pan.add(tableau[j][i]);
             }
         }
         pan.setPreferredSize(new Dimension(600, 600));
         setResizeWeight(0.1);
-        choosePanel = new JChoosePanel(this);
+        choosePanel = new JChoosePanel(this, taskDisplay);
         add(choosePanel);
         add(pan);
         setDividerSize(0);

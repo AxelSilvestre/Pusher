@@ -12,18 +12,18 @@ public class JFrameEndGame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
-	public JFrameEndGame(boolean win){
+	public JFrameEndGame(boolean win, TaskDisplay taskDisplay){
 		super("Partie terminée");
 		JPanel jp = new JPanel();
 		JLabel jl = new JLabel(win ? "<html>Vous avez terminé ce <br> niveau avec succés!<html>" : "Vous avez perdu!");
 		jp.add(jl);
-		JButtonCancel menu = new JButtonCancel(this, true);
-		JButtonRetry retry = new JButtonRetry(this);
+		JButtonCancel menu = new JButtonCancel(this, true, taskDisplay);
+		JButtonRetry retry = new JButtonRetry(this, taskDisplay);
 		jp.add(retry);
 		jp.add(menu);
 		add(jp);
 		toFront();
-		TaskDisplay.frame.setEnabled(false);
+		taskDisplay.frame.setEnabled(false);
 		
 		setSize(200, 150);
 		setLocationRelativeTo(null);
