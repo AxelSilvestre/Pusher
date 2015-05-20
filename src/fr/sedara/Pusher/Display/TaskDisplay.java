@@ -43,7 +43,7 @@ public class TaskDisplay implements Runnable {
 	
 	public void setKeyListener(){
 		frame.removeKeyListener(keyListener);
-		keyListener = new KeyListener(controller.getGame(), this);
+		keyListener = new KeyListener(this);
 		frame.addKeyListener(keyListener);
 		
 	}

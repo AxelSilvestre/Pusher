@@ -1,6 +1,6 @@
 package fr.sedara.Pusher.Display.JButtons;
 
-import fr.sedara.Pusher.Champs;
+import fr.sedara.Pusher.Board;
 import fr.sedara.Pusher.Display.JPanelEditor;
 import fr.sedara.Pusher.Display.TaskDisplay;
 
@@ -22,7 +22,7 @@ public class JButtonCreateLevel extends JButton implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
-        taskDisplay.editorPanel = new JPanelEditor(new Champs(), taskDisplay);
+        taskDisplay.editorPanel = new JPanelEditor(new Board(), taskDisplay);
         taskDisplay.frame.setContentPane(taskDisplay.editorPanel);
         taskDisplay.frame.setSize(taskDisplay.editorPanel.getChamps().getX() * 50 + 100,
                                   taskDisplay.editorPanel.getChamps().getY() * 50);

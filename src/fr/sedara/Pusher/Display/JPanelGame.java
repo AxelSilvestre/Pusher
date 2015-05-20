@@ -1,6 +1,6 @@
 package fr.sedara.Pusher.Display;
 
-import fr.sedara.Pusher.Champs;
+import fr.sedara.Pusher.Board;
 
 import javax.swing.JPanel;
 
@@ -11,16 +11,16 @@ public class JPanelGame extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private JLabelCase[][] tableau;
-    private Champs         champs;
+    private Board         board;
 
 
-    public JPanelGame(Champs champs, TaskDisplay taskDisplay) {
-        this.champs = champs;
-        setLayout(new GridLayout(champs.getY(), champs.getX()));
-        tableau = new JLabelCase[champs.getX()][champs.getY()];
-        for (int i = 0; i < champs.getY(); i++) {
-            for (int j = 0; j < champs.getX(); j++) {
-                tableau[j][i] = new JLabelCase(champs.getCase(j, i), false, taskDisplay);
+    public JPanelGame(Board board, TaskDisplay taskDisplay) {
+        this.board = board;
+        setLayout(new GridLayout(board.getY(), board.getX()));
+        tableau = new JLabelCase[board.getX()][board.getY()];
+        for (int i = 0; i < board.getY(); i++) {
+            for (int j = 0; j < board.getX(); j++) {
+                tableau[j][i] = new JLabelCase(board.getBox(j, i), false, taskDisplay);
                 add(tableau[j][i]);
             }
         }
@@ -30,15 +30,15 @@ public class JPanelGame extends JPanel {
 
 
     public void setColor() {
-        for (int i = 0; i < champs.getX(); i++) {
-            for (int j = 0; j < champs.getY(); j++) {
+        for (int i = 0; i < board.getX(); i++) {
+            for (int j = 0; j < board.getY(); j++) {
                 tableau[i][j].setColor();
             }
         }
     }
 
-    public Champs getChamps() {
-        return champs;
+    public Board getChamps() {
+        return board;
     }
 
 }

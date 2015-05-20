@@ -1,6 +1,6 @@
 package fr.sedara.Pusher.Display;
 
-import fr.sedara.Pusher.Champs;
+import fr.sedara.Pusher.Board;
 import fr.sedara.Pusher.Type;
 
 import javax.swing.JPanel;
@@ -11,12 +11,12 @@ import java.awt.GridLayout;
 @SuppressWarnings("serial")
 public class JPanelEditor extends JSplitPane {
 
-    private Champs         champs;
+    private Board         champs;
     private JLabelCase[][] tableau;
     private JChoosePanel   choosePanel;
     private Type           selectedType;
 
-    public JPanelEditor(Champs champs, TaskDisplay taskDisplay) {
+    public JPanelEditor(Board champs, TaskDisplay taskDisplay) {
         super(JSplitPane.HORIZONTAL_SPLIT);
         this.champs = champs;
         JPanel pan = new JPanel();
@@ -24,7 +24,7 @@ public class JPanelEditor extends JSplitPane {
         tableau = new JLabelCase[champs.getX()][champs.getY()];
         for (int i = 0; i < champs.getY(); i++) {
             for (int j = 0; j < champs.getX(); j++) {
-                tableau[j][i] = new JLabelCase(champs.getCase(j, i), true, taskDisplay);
+                tableau[j][i] = new JLabelCase(champs.getBox(j, i), true, taskDisplay);
                 pan.add(tableau[j][i]);
             }
         }
@@ -44,7 +44,7 @@ public class JPanelEditor extends JSplitPane {
         this.selectedType = selectedType;
     }
 
-    public Champs getChamps() {
+    public Board getChamps() {
         return champs;
     }
 

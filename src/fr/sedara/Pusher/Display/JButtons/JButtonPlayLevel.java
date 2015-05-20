@@ -1,6 +1,6 @@
 package fr.sedara.Pusher.Display.JButtons;
 
-import fr.sedara.Pusher.Champs;
+import fr.sedara.Pusher.Board;
 import fr.sedara.Pusher.Display.JPanelGame;
 import fr.sedara.Pusher.Display.TaskDisplay;
 import fr.sedara.Pusher.LevelFileManager;
@@ -25,7 +25,7 @@ public class JButtonPlayLevel extends JButton implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (!fileName.equalsIgnoreCase("")) {
-            Champs c = null;
+            Board c = null;
             try {
                 c = LevelFileManager.load(fileName);
             }
