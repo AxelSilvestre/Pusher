@@ -13,37 +13,37 @@ public enum Type {
     /**
      * The Player.
      */
-    PLAYER("P", Color.BLUE, "Joueur"),
+    PLAYER("P", Color.BLUE, "player"),
     
     /**
      * A wall.
      */
-    WALL("W", Color.RED, "Mur"),
+    WALL("W", Color.RED, "wall"),
     
     /**
      * A playable box.
      */
-    PLAYABLE_BOX("X", Color.GRAY, "Bloc jouable"),
+    PLAYABLE_BOX("X", Color.GRAY, "playable"),
     
     /**
      * A box which kills the player if he touches it.
      */
-    DEADLY("D", Color.WHITE, "Bloc tueur"),
+    DEADLY("D", Color.WHITE, "deadly"),
     
     /**
      * A breakable box which will be destroyed if the player of a playable box touches it.
      */
-    BREAKABLE("B", Color.YELLOW, "Bloc destructible"),
+    BREAKABLE("B", Color.YELLOW, "breakable"),
     
     /**
      * An objective block.
      */
-    OBJECTIVE("O", Color.CYAN, "Bloc objectif"),
+    OBJECTIVE("O", Color.CYAN, "objective"),
     
     /**
      * A box which contains nothing.
      */
-    NULL(" ", Color.BLACK, "Vide");
+    NULL(" ", Color.BLACK, "null");
 
     /**
      * The number of all the different boxes.

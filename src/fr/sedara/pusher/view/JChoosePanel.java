@@ -37,7 +37,7 @@ public class JChoosePanel extends JPanel {
             gbc.gridx = 0;
             gbc.gridy = i + 1;
             jl = new JLabelChoose(Type.getType(i), this, taskDisplay);
-            name = new JLabel(jl.getType().getName());
+            name = new JLabel(taskDisplay.getController().getString(jl.getType().getName()));
             add(name, gbc);
             gbc.gridx = 1;
             add(jl, gbc);

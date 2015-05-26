@@ -29,7 +29,7 @@ public class JFramePause extends JFrame implements KeyListener{
 		jp.add(home);
 		add(jp);
 		setLocationRelativeTo(null);
-		setSize(200,150);
+		setSize(150,150);
 		setEnabled(true);
 		toFront();
 		setVisible(true);
