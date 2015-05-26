@@ -218,7 +218,7 @@ public class Game {
         for (Box c : boxes) {
             tab[i][1] = c.getType();
             tab[i][0] = board.getBox(c.getLocation().getX() + dirX, c.getLocation().getY() + dirY);
-            if(((Box) tab[i][0]).getType() == Type.OBJETIVE)
+            if(((Box) tab[i][0]).getType() == Type.OBJECTIVE)
             	objectives.remove((Box) tab[i][0]); 
             i++;
         }
@@ -255,7 +255,7 @@ public class Game {
             	cc.setType(Type.NULL);
             	b = false;
             }
-            if(cc.getType() == Type.OBJETIVE && c.getType() == Type.PLAYER)
+            if(cc.getType() == Type.OBJECTIVE && c.getType() == Type.PLAYER)
             	return false;
             if(cc.getType() == Type.DEADLY && c.getType() == Type.PLAYER){
             	c.setType(Type.NULL);
@@ -265,7 +265,7 @@ public class Game {
             	return false;
             }
             
-            if (cc.getType() != Type.NULL && !boxes.contains(cc) && cc.getType() != Type.OBJETIVE) 
+            if (cc.getType() != Type.NULL && !boxes.contains(cc) && cc.getType() != Type.OBJECTIVE) 
                 return false;
         	}catch(ArrayIndexOutOfBoundsException e){}
             

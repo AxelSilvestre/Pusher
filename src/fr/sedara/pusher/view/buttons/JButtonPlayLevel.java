@@ -18,7 +18,7 @@ public class JButtonPlayLevel extends JButton implements ActionListener {
     private final TaskDisplay taskDisplay;
 
     public JButtonPlayLevel(TaskDisplay taskDisplay) {
-        super("Jouer");
+        super(taskDisplay.getController().getString("play"));
         fileName = "";
         this.taskDisplay = taskDisplay;
         addActionListener(this);

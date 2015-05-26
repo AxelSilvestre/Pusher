@@ -19,7 +19,7 @@ public class JButtonDeleteLevel extends JButton implements ActionListener {
     private final TaskDisplay taskDisplay;
 
     public JButtonDeleteLevel(JFrame currentFrame, TaskDisplay taskDisplay) {
-        super("Supprimer");
+        super(taskDisplay.getController().getString("delete"));
         fileName = "";
         current = currentFrame;
         this.taskDisplay = taskDisplay;

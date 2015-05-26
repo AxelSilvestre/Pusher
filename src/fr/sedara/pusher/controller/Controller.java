@@ -40,10 +40,11 @@ public class Controller {
 		display = new TaskDisplay(this);
 		locale = new Locale("en", "EN");
 		bundle = ResourceBundle.getBundle("PusherLang", locale);
+		
 		SwingUtilities.invokeLater(display);
 	}
 	
-	/** Creates a new Game.
+	/** Creates a new default Game.
 	 * 
 	 */
 	public void createNewGame() {
@@ -133,8 +134,8 @@ public class Controller {
 		game.getTimer().schedule(game.timerTask(x, y), 0, 100);
 	}
 	
-	public String getString(int key){
-		return bundle.getString(String.valueOf(key));
+	public String getString(String key){
+		return bundle.getString(key);
 	}
 	
 	public void setLanguage(String lang) {

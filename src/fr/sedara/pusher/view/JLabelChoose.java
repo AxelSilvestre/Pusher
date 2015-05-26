@@ -13,10 +13,12 @@ public class JLabelChoose extends JLabel implements MouseListener {
 
     private Type         type;
     private JChoosePanel panel;
+    private TaskDisplay taskDisplay;
 
-    public JLabelChoose(Type type, JChoosePanel panel) {
+    public JLabelChoose(Type type, JChoosePanel panel, TaskDisplay taskDisplay) {
         this.type = type;
         this.panel = panel;
+        this.taskDisplay = taskDisplay;
         setPreferredSize(new Dimension(30, 30));
         setOpaque(true);
         setBackground(type.getColor());
@@ -30,7 +32,7 @@ public class JLabelChoose extends JLabel implements MouseListener {
 
     public void mouseClicked(MouseEvent e) {
     	if(panel.exisitingPlayer() && type == Type.PLAYER)
-    		panel.setWarning("<html>Joueur déjà<br>présent<html>");
+    		panel.setWarning(taskDisplay.getController().getString("presentplayer"));
     	else{
     		panel.setSelectedType(type);
     		panel.setWarning("");

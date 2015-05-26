@@ -8,6 +8,7 @@ import java.awt.Color;
  */
 public enum Type {
 
+	// TODO Langue pour EUX !
 
     /**
      * The Player.
@@ -37,7 +38,7 @@ public enum Type {
     /**
      * An objective block.
      */
-    OBJETIVE("O", Color.CYAN, "Bloc objectif"),
+    OBJECTIVE("O", Color.CYAN, "Bloc objectif"),
     
     /**
      * A box which contains nothing.
@@ -86,7 +87,7 @@ public enum Type {
             case 1:
                 return WALL;
             case 2:
-                return OBJETIVE;
+                return OBJECTIVE;
             case 3:
                 return PLAYABLE_BOX;
             case 4:

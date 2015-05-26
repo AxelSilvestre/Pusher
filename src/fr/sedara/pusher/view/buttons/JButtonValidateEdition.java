@@ -16,7 +16,7 @@ public class JButtonValidateEdition extends JButton implements ActionListener {
     private final TaskDisplay taskDisplay;
 
     public JButtonValidateEdition(TaskDisplay taskDisplay) {
-        setText("Valider");
+        setText(taskDisplay.getController().getString("apply"));
         this.taskDisplay = taskDisplay;
         addActionListener(this);
     }

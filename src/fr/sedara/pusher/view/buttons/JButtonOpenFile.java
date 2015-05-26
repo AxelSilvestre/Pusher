@@ -20,14 +20,14 @@ public class JButtonOpenFile extends JButton implements ActionListener {
     private final TaskDisplay taskDisplay;
 
     public JButtonOpenFile(JFrame currentFrame, TaskDisplay taskDisplay) {
-        super("Ouvrir");
+        super(taskDisplay.getController().getString("open"));
         current = currentFrame;
         this.taskDisplay = taskDisplay;
         addActionListener(this);
     }
 
     public JButtonOpenFile( TaskDisplay taskDisplay) {
-        super("Ouvrir");
+        super(taskDisplay.getController().getString("open"));
         current = null;
         this.taskDisplay = taskDisplay;
         addActionListener(this);

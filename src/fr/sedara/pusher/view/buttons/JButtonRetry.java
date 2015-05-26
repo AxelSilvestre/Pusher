@@ -20,7 +20,7 @@ public class JButtonRetry extends JButton implements ActionListener{
 	private JFrame frame;
 
 	public JButtonRetry(JFrame frameToClose, TaskDisplay taskDisplay) {
-		super("Recommencer");
+		super(taskDisplay.getController().getString("retry"));
 		frame = frameToClose;
 		this.taskDisplay = taskDisplay;
 		addActionListener(this);

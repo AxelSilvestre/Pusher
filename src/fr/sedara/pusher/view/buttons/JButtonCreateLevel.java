@@ -1,7 +1,5 @@
 package fr.sedara.pusher.view.buttons;
 
-import javax.swing.JButton;
-
 import fr.sedara.pusher.model.Board;
 import fr.sedara.pusher.view.JPanelEditor;
 import fr.sedara.pusher.view.TaskDisplay;
@@ -9,15 +7,15 @@ import fr.sedara.pusher.view.TaskDisplay;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JButtonCreateLevel extends JButton implements ActionListener {
+public class JButtonCreateLevel extends JButtonPusher implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private final TaskDisplay taskDisplay;
 
-
     public JButtonCreateLevel(TaskDisplay taskDisplay) {
-        setText("Créer un niveau");
+        setText(taskDisplay.getController().getString("createlevel"));
         this.taskDisplay = taskDisplay;
+        id = "createlevel";
         addActionListener(this);
     }
 

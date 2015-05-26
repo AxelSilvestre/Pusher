@@ -108,7 +108,7 @@ public class Board implements Serializable {
     	for(int i = 0; i < x; i++){
     		for(int j = 0; j < y; j++){
     			c = getBox(i, j);
-    			if(c.getType() == Type.OBJETIVE)
+    			if(c.getType() == Type.OBJECTIVE)
     				list.add(c);
     		}
     	}

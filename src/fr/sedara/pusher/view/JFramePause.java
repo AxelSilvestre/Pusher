@@ -17,12 +17,12 @@ public class JFramePause extends JFrame implements KeyListener{
 	
 	
 	public JFramePause(TaskDisplay taskDisplay) {
-		super("Pause");
+		super(taskDisplay.getController().getString("pause"));
 		this.taskDisplay = taskDisplay;
 		taskDisplay.frame.setEnabled(false);
 		JPanel jp = new JPanel();
 		JButtonCancel home = new JButtonCancel(this, true, taskDisplay);
-		JButtonCancel cancel = new JButtonCancel(this, false, "Reprendre", taskDisplay);
+		JButtonCancel cancel = new JButtonCancel(this, false, taskDisplay.getController().getString("resume"), taskDisplay);
 		JButtonRetry retry = new JButtonRetry(this, taskDisplay);
 		jp.add(cancel);
 		jp.add(retry);

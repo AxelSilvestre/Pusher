@@ -2,6 +2,7 @@ package fr.sedara.pusher.view;
 
 import javax.swing.JPanel;
 
+import fr.sedara.pusher.view.buttons.JButtonChangeLang;
 import fr.sedara.pusher.view.buttons.JButtonCreateLevel;
 import fr.sedara.pusher.view.buttons.JButtonPlay;
 import fr.sedara.pusher.view.buttons.JButtonQuit;
@@ -12,6 +13,7 @@ public class HomeMenu extends JPanel {
     private JButtonCreateLevel creator;
     private JButtonPlay        play;
     private JButtonQuit        quit;
+    private JButtonChangeLang        lang;
 
     public HomeMenu(TaskDisplay taskDisplay) {
         play = new JButtonPlay(taskDisplay);
@@ -20,6 +22,9 @@ public class HomeMenu extends JPanel {
         add(creator);
         quit = new JButtonQuit(taskDisplay);
         add(quit);
+        lang = new JButtonChangeLang(taskDisplay);
+        add(lang);
+        
 
     }
 

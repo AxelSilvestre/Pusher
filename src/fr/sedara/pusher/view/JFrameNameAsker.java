@@ -23,7 +23,7 @@ public class JFrameNameAsker extends JFrame {
 
     public JFrameNameAsker(TaskDisplay taskDisplay) {
         jPanel = new JPanel();
-        label = new JLabel("<html>Saisissez le nom de votre niveau:</html>");
+        label = new JLabel(taskDisplay.getController().getString("levelname"));
         label.setPreferredSize(new Dimension(250, 50));
         jPanel.add(label);
         jTextField = new JTextField();

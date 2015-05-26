@@ -36,7 +36,7 @@ public class JChoosePanel extends JPanel {
         for (int i = 0; i < Type.NUMBER_OF_BLOCKS; i++) {
             gbc.gridx = 0;
             gbc.gridy = i + 1;
-            jl = new JLabelChoose(Type.getType(i), this);
+            jl = new JLabelChoose(Type.getType(i), this, taskDisplay);
             name = new JLabel(jl.getType().getName());
             add(name, gbc);
             gbc.gridx = 1;

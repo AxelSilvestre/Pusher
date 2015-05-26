@@ -22,7 +22,7 @@ public class JButtonValidateName extends JButton implements ActionListener {
     private final TaskDisplay taskDisplay;
 
     public JButtonValidateName(JTextField textField, JFrameNameAsker currentFrame, TaskDisplay taskDisplay) {
-        super("Valider");
+        super(taskDisplay.getController().getString("apply"));
         field = textField;
         current = currentFrame;
         this.taskDisplay = taskDisplay;

@@ -1,6 +1,8 @@
 Pusher
 ======
 
+Il faut mettre en ClassPath le dossier Pusher/lang, sinon le jeu ne se lance pas.
+
 ## Relectures
 
 - 30 mars 2015 :

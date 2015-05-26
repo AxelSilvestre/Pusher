@@ -16,8 +16,8 @@ public class JOptionPaneOverwriteLevel extends JOptionPane{
 
 	public JOptionPaneOverwriteLevel(JFrame frame, String fileName, TaskDisplay taskDisplay) {
 		frame.setEnabled(false);
-		final JOptionPane jo = new JOptionPane("Le niveau existe déjà, voulez vous l'écraser?", JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
-		final JDialog jd = new JDialog(frame,"Attention!",true);
+		final JOptionPane jo = new JOptionPane(taskDisplay.getController().getString("erase"), JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+		final JDialog jd = new JDialog(frame,taskDisplay.getController().getString("warning"),true);
 		jd.setContentPane(jo);
 		jd.setLocationRelativeTo(null);
 		jd.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);

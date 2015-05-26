@@ -17,7 +17,7 @@ public class JButtonCancel extends JButton implements ActionListener {
     private final TaskDisplay taskDisplay;
 
     public JButtonCancel(boolean home, TaskDisplay taskDisplay) {
-        setText("Annuler");
+        setText(taskDisplay.getController().getString("cancel"));
         frameToClose = null;
         this.home = home;
         this.taskDisplay = taskDisplay;
@@ -25,7 +25,7 @@ public class JButtonCancel extends JButton implements ActionListener {
     }
 
     public JButtonCancel(JFrame frameToClose, TaskDisplay taskDisplay) {
-        setText("Annuler");
+        setText(taskDisplay.getController().getString("cancel"));
         this.frameToClose = frameToClose;
         home = false;
         this.taskDisplay = taskDisplay;
@@ -33,7 +33,7 @@ public class JButtonCancel extends JButton implements ActionListener {
     }
     
     public JButtonCancel(JFrame frameToClose, boolean home, TaskDisplay taskDisplay) {
-        setText("Menu principal");
+        setText(taskDisplay.getController().getString("home"));
         this.frameToClose = frameToClose;
         this.home = home;
         this.taskDisplay = taskDisplay;

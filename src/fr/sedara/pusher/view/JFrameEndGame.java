@@ -13,9 +13,9 @@ public class JFrameEndGame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	public JFrameEndGame(boolean win, TaskDisplay taskDisplay){
-		super("Partie terminée");
+		super(taskDisplay.getController().getString("endgame"));
 		JPanel jp = new JPanel();
-		JLabel jl = new JLabel(win ? "<html>Vous avez terminé ce <br> niveau avec succés!<html>" : "Vous avez perdu!");
+		JLabel jl = new JLabel(win ? taskDisplay.getController().getString("win") : taskDisplay.getController().getString("lost"));
 		jp.add(jl);
 		JButtonCancel menu = new JButtonCancel(this, true, taskDisplay);
 		JButtonRetry retry = new JButtonRetry(this, taskDisplay);

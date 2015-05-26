@@ -35,9 +35,9 @@ public class JPanelGame extends JSplitPane {
         JPanel j2 = new JPanel();
         JPanel j3 = new JPanel();
         
-        JLabel ja = new JLabel("Move");
-        JLabel jsb = new JLabel("Catch / Release");
-        JLabel jp = new JLabel("Pause menu");
+        JLabel ja = new JLabel(taskDisplay.getController().getString("move"));
+        JLabel jsb = new JLabel(taskDisplay.getController().getString("catch"));
+        JLabel jp = new JLabel(taskDisplay.getController().getString("pause"));
         
         ImageIcon ia = new ImageIcon("img/arrows.png");
         ImageIcon isb = new ImageIcon("img/spacebar.png");
