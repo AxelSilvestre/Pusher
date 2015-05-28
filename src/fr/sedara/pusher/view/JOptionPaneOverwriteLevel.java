@@ -41,7 +41,7 @@ public class JOptionPaneOverwriteLevel extends JOptionPane{
 			frame.dispose();
 			frame.setState(JFrame.EXIT_ON_CLOSE);
             try {
-                LevelFileManager.save(taskDisplay.editorPanel.getChamps(), fileName);
+                LevelFileManager.save(taskDisplay.editorPanel.getBoard(), fileName);
             }catch (IOException e1) {}
             taskDisplay.frame.toFront();
             taskDisplay.frame.setEnabled(true);

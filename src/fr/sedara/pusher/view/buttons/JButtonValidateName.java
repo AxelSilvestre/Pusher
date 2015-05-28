@@ -42,7 +42,7 @@ public class JButtonValidateName extends JButton implements ActionListener {
             }
 
             try {
-                LevelFileManager.save(taskDisplay.editorPanel.getChamps(), field.getText());
+                LevelFileManager.save(taskDisplay.editorPanel.getBoard(), field.getText());
             }
             catch (IOException e1) {}
             current.dispose();

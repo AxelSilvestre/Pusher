@@ -12,24 +12,24 @@ import java.awt.GridLayout;
 @SuppressWarnings("serial")
 public class JPanelEditor extends JSplitPane {
 
-    private Board         champs;
+    private Board         board;
     private JLabelCase[][] tableau;
     private JChoosePanel   choosePanel;
     private Type           selectedType;
 
-    public JPanelEditor(Board champs, TaskDisplay taskDisplay) {
+    public JPanelEditor(Board board, TaskDisplay taskDisplay) {
         super(JSplitPane.HORIZONTAL_SPLIT);
-        this.champs = champs;
+        this.board = board;
         JPanel pan = new JPanel();
-        pan.setLayout(new GridLayout(champs.getY(), champs.getX()));
-        tableau = new JLabelCase[champs.getX()][champs.getY()];
-        for (int i = 0; i < champs.getY(); i++) {
-            for (int j = 0; j < champs.getX(); j++) {
-                tableau[j][i] = new JLabelCase(champs.getBox(j, i), true, taskDisplay);
+        pan.setLayout(new GridLayout(board.getY(), board.getX()));
+        tableau = new JLabelCase[board.getX()][board.getY()];
+        for (int i = 0; i < board.getY(); i++) {
+            for (int j = 0; j < board.getX(); j++) {
+                tableau[j][i] = new JLabelCase(board.getBox(j, i), true, taskDisplay);
                 pan.add(tableau[j][i]);
             }
         }
-        pan.setPreferredSize(new Dimension(champs.getX() * 50, champs.getY() * 50));
+        pan.setPreferredSize(new Dimension(board.getX() * 50, board.getY() * 50));
         setResizeWeight(0.1);
         choosePanel = new JChoosePanel(this, taskDisplay);
         add(choosePanel);
@@ -45,12 +45,12 @@ public class JPanelEditor extends JSplitPane {
         this.selectedType = selectedType;
     }
 
-    public Board getChamps() {
-        return champs;
+    public Board getBoard() {
+        return board;
     }
 
 	public boolean havePlayer() {
-		if(champs.getPlayer() != null)
+		if(board.getPlayer() != null)
 			return true;
 		return false;
 	}

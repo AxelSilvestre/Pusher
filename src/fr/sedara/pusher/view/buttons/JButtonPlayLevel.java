@@ -37,7 +37,7 @@ public class JButtonPlayLevel extends JButton implements ActionListener {
             taskDisplay.setKeyListener();
             taskDisplay.gamePanel = j;
             taskDisplay.frame.setContentPane(j);
-            taskDisplay.frame.setSize(j.getChamps().getX() * 50, j.getChamps().getY() * 50 + 200);
+            taskDisplay.frame.setSize(j.getChamps().getX() * 10 + 500, j.getChamps().getY() * 10 + 500);
             taskDisplay.frame.setLocationRelativeTo(null);            
             taskDisplay.frame.requestFocusInWindow();
             taskDisplay.frame.revalidate();

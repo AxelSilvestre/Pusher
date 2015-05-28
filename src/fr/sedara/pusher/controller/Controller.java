@@ -38,9 +38,14 @@ public class Controller {
 	 */
 	public Controller() {
 		display = new TaskDisplay(this);
+		
+		/*
+		 * Si le jeu ne charge pas et génère une erreur à ce niveau, il faut rajouter dans le path
+		 * le dossier lang.
+		 */
 		locale = new Locale("en", "EN");
 		bundle = ResourceBundle.getBundle("PusherLang", locale);
-		
+
 		SwingUtilities.invokeLater(display);
 	}
 	
@@ -142,6 +147,5 @@ public class Controller {
 		locale = new Locale(lang.toLowerCase(), lang.toUpperCase());
 		bundle = ResourceBundle.getBundle("PusherLang", locale);
 	}
-	
 	
 }
